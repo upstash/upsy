@@ -1,0 +1,8 @@
+/.git
+/node_modules
+.dockerignore
+.env
+Dockerfile
+fly.toml
+/upsy-next
+!/upsy-next/lib/llm.mjs
