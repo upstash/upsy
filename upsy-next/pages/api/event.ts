@@ -56,11 +56,17 @@ export default async function handler(
 
 
         const c = new Client({
-            token: "eyJVc2VySUQiOiI4ZTRjYjM0OS04ZjY0LTRhNTgtODRiMS1iMDNiNTk5NmNhODgiLCJQYXNzd29yZCI6IjMwY2EzYmU2MTk4MzQzMmVhM2IxNTRjMTAzMjhhOGQ2In0=",
+            token: process.env.QSTASH_TOKEN || "",
         });
 
+        let appUrl = process.env.VERCEL_URL || "";
+        if (appUrl.endsWith('/')) {
+            appUrl = appUrl.slice(0, -1);
+        }
+
         const qstashResponse = await c.publishJSON({
-            url: "https://upsy-next.vercel.app/api/message",
+            // url: `https://${appUrl}/api/message`,
+            url: "https://upsy.vercel.app/api/message",
             // or topic: "the name or id of a topic"
             body: {
                 event: body.event,
