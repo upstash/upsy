@@ -215,6 +215,22 @@ Upsy runs on RAG architecture. So when a message is received by Upsy backend it 
 **Behavior Adjustment:** If you think Upsy talks too much or be intrusive:
 - Check out the code and update the prompts in llm.mjs file. You can also change the `temperature` parameter to make Upsy more talkative or less talkative. You need to deploy the application.
 
+### Development
+Enable Socket mode from Slack dashboard for easier development.
+
+For Fly version use the root folder. 
+```bash
+   npm install
+   node index.js
+```
+
+For Vercel version use the `upsy-next` folder.
+```bash
+   cd upsy-next
+   npm install
+   npm run dev
+```
+
 ## Future Work
 Upsy is a work in progress. We will be adding more features and improving the current ones. We hope to receive support from the community through contributions. Here are some of the features we plan to add.
 
