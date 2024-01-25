@@ -32,7 +32,7 @@ Upsy is an open-source project. You can deploy and run the backend and integrate
 
 ## 0 - Prerequisites
 
-Create an OpenAI account to obtain an API key. Set up an Upstash account and create one Redis and one Vector database. These keys will be required as environment variables in the backend deployment step.
+Create an [OpenAI](https://openai.com) account to obtain an API key. Set up an [Upstash](https://console.upstash.com) account and create one Redis and one Vector database. These keys will be required as environment variables in the backend deployment step.
 
 ## 1 - Slack App Set up
 
