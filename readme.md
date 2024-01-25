@@ -10,25 +10,25 @@ Upsy is a unique Slack bot that acts like your colleague but with a superpower: 
 
 ## Features
 
-Channel Conversations: Add Upsy to any channel, and it will store the channel history into its memory. In the channel, Upsy jumps in only if a question is asked that has an answer in Upsy’s memory or if someone mentions Upsy in their message.
+**Channel Conversations:** Add Upsy to any channel, and it will store the channel history into its memory. In the channel, Upsy jumps in only if a question is asked that has an answer in Upsy’s memory or if someone mentions Upsy in their message.
 
-Direct Messages: Communicate with Upsy via Direct Messages (DMs). Here, it functions similarly to ChatGPT. You can add new information to Upsy’s memory by interacting in DMs.
+**Direct Messages:** Communicate with Upsy via Direct Messages (DMs). Here, it functions similarly to ChatGPT. You can add new information to Upsy’s memory by interacting in DMs.
 
-Unified Memory: Upsy possesses a single, combined memory. This enables him to use information learned from one channel in another channel.
+**Unified Memory:** Upsy possesses a single, combined memory. This enables him to use information learned from one channel in another channel.
 
 Upsy is an open-source project. You can deploy and run the backend and integrate it into your Slack channel. The code is customizable, allowing you to tailor Upsy’s behavior to your preferences. We will guide you through setting up Upsy for your Slack workspace step by step.
 
 ## Stack
 
-Backend: Node.js ([Fly.io](https://fly.io) version), Next.js ([Vercel](https://vercel.com) version)
+**Backend:** Node.js ([Fly.io](https://fly.io) version), Next.js ([Vercel](https://vercel.com) version)
 
-AI Integration: OpenAI for embedding and chat API
+**AI Integration:** OpenAI for embedding and chat API
 
-Data Storage: Upstash Vector for vector store, Upstash Redis for chat history
+**Data Storage:** Upstash Vector for vector store, Upstash Redis for chat history
 
-LLM Orchestration: [Langchain](https://langchain.com)
+**LLM Orchestration:** [Langchain](https://langchain.com)
 
-Deployment Options: [Fly.io](https://fly.io), [Vercel](https://vercel.com)
+**Deployment Options:** [Fly.io](https://fly.io), [Vercel](https://vercel.com)
 
 ## 0 - Prerequisites
 
@@ -200,19 +200,19 @@ Upsy runs on RAG architecture. So when a message is received by Upsy backend it 
 ### Troubleshooting
 
 
-DM Issues: If you see "Sending messages to this app has been turned off" in the DM screen of Upsy, then you can try restarting your Slack. If the issue is not resolved, you can remove Upsy from your workspace, reinstall it, and approve the requested scopes.
+**DM Issues:** If you see "Sending messages to this app has been turned off" in the DM screen of Upsy, then you can try restarting your Slack. If the issue is not resolved, you can remove Upsy from your workspace, reinstall it, and approve the requested scopes.
 
-Non-responsiveness: If Upsy appears online but never answers back, things to check include:
+**Non-responsiveness:** If Upsy appears online but never answers back, things to check include:
 - Check the logs in Vercel or Fly console.
 - If you are running on Vercel, check the logs on QStash console.
 - Check if your Slack token and signing keys are correct.
 
-Context Awareness: If Upsy answers but is not aware of the context (channel history), please do the following:
+**Context Awareness:** If Upsy answers but is not aware of the context (channel history), please do the following:
 
 - Verify if Upsy pulls the history and adds it to Vector when you add Upsy to a channel by checking the logs in Vercel or Fly console.
 - Check the Upstash Vector dashboard to confirm if the channel history is stored in the vector.
 
-Behavior Adjustment: If you think Upsy talks too much or be intrusive:
+**Behavior Adjustment:** If you think Upsy talks too much or be intrusive:
 - Check out the code and update the prompts in llm.mjs file. You can also change the `temperature` parameter to make Upsy more talkative or less talkative. You need to deploy the application.
 
 ## Future Work
