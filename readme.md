@@ -192,9 +192,9 @@ You can provide new information to Upsy in DM and ask about it in a public chann
 ## How does it work?
 Upsy runs on RAG architecture. So when a message is received by Upsy backend it collects the context from Upstash Vector and sends it to OpenAI for embedding. Morevoer it collects the conversation history from Upstash Redis. Then it sends the question, history and context to Langchain to get the answer. Finally, it sends the answer to Slack.   
 
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/architecture.png" width="300">
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/architecture.png" width="800">
 
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png" width="300">
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png" width="600">
 
 
 ### Troubleshooting
