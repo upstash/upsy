@@ -11,7 +11,9 @@ Upsy is a unique Slack bot that acts like your colleague but with a superpower: 
 ## Features
 
 Channel Conversations: Add Upsy to any channel, and it will store the channel history into its memory. In the channel, Upsy jumps in only if a question is asked that has an answer in Upsy’s memory or if someone mentions Upsy in their message.
+
 Direct Messages: Communicate with Upsy via Direct Messages (DMs). Here, it functions similarly to ChatGPT. You can add new information to Upsy’s memory by interacting in DMs.
+
 Unified Memory: Upsy possesses a single, combined memory. This enables him to use information learned from one channel in another channel.
 
 Upsy is an open-source project. You can deploy and run the backend and integrate it into your Slack channel. The code is customizable, allowing you to tailor Upsy’s behavior to your preferences. We will guide you through setting up Upsy for your Slack workspace step by step.
