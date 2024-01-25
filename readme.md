@@ -1,5 +1,9 @@
 # Upsy: Your new mate on Slack. Powered by AI.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)
+
+
+
 Upsy is a unique Slack bot that acts like your colleague but with a superpower: it remembers all conversations. When you add Upsy to a Slack channel, it pulls all conversations from the channel's history and starts listening to new messages. If a question is asked, Upsy checks his memory context and answers if he finds a relevant response in the context, which comprises all messages across all channels.
 
 // todo image
@@ -186,9 +190,9 @@ You can provide new information to Upsy in DM and ask about it in a public chann
 ## How does it work?
 Upsy runs on RAG architecture. So when a message is received by Upsy backend it collects the context from Upstash Vector and sends it to OpenAI for embedding. Morevoer it collects the conversation history from Upstash Redis. Then it sends the question, history and context to Langchain to get the answer. Finally, it sends the answer to Slack.   
 
-[![Upsy Architecture](https://raw.githubusercontent.com/upstash/upsy/master/architecture.png)](https://raw.githubusercontent.com/upstash/upsy/master/architecture.png)
+[![Upsy Architecture](https://raw.githubusercontent.com/upstash/upsy/master/architecture.png)](https://raw.githubusercontent.com/upstash/upsy/master/architecture.png | width=300)
 
-[![Upsy Algorithm](https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png)](https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png)
+[![Upsy Algorithm](https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png)](https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png | width=300)
 
 
 ### Troubleshooting
