@@ -20,15 +20,15 @@ Upsy is an open-source project. You can deploy and run the backend and integrate
 
 ## Stack
 
-Backend: Node.js (Fly.io version), Next.js (Vercel version)
+Backend: Node.js ([Fly.io](https://fly.io) version), Next.js ([Vercel](https://vercel.com) version)
 
 AI Integration: OpenAI for embedding and chat API
 
 Data Storage: Upstash Vector for vector store, Upstash Redis for chat history
 
-LLM Orchestration: Langchain
+LLM Orchestration: [Langchain](https://langchain.com)
 
-Deployment Options: Fly.io, Vercel
+Deployment Options: [Fly.io](https://fly.io), [Vercel](https://vercel.com)
 
 ## 0 - Prerequisites
 
