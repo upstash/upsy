@@ -3,7 +3,6 @@
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)
 
 
-
 Upsy is a unique Slack bot that acts like your colleague but with a superpower: it remembers all conversations. When you add Upsy to a Slack channel, it pulls all conversations from the channel's history and starts listening to new messages. If a question is asked, Upsy checks his memory context and answers if he finds a relevant response in the context, which comprises all messages across all channels.
 
 // todo image
@@ -103,6 +102,42 @@ Congratulations, you've created your Slack app. We will revisit this dashboard t
 We have two options for hosting our application: deploying to Fly.io or Vercel.
 
 
+### 2.1 - Vercel Deployment
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)                              
+
+Deploy Upsy backend to Vercel by clicking the provided Deploy button. Ensure all environment variables are set correctly:
+
+```properties
+OPENAI_API_KEY= 
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+QSTASH_TOKEN=
+QSTASH_CURRENT_SIGNING_KEY=
+QSTASH_NEXT_SIGNING_KEY=
+UPSTASH_VECTOR_REST_URL=
+UPSTASH_VECTOR_REST_TOKEN=
+SLACK_ACCESS_TOKEN= -> Bot User OAuth Token
+SLACK_SIGNING_SECRET=
+APP_URL= -> your Vercel app url. you will add this after deployment 
+```
+
+> [!NOTE]  
+> Yes, we know it is ugly to enter so many env variables for Upstash products. We will soon improve this to require a single token.
+
+Once, the project is deployed, go to your Slack dashboard. On the left menu click on `Event & Subscriptions`. Enter Vercel app url appending `/api/event` (example: [https://upsy.vercel.app/api/event](https://upsy.vercel.app/api/event)) to the Request URL input.
+
+
+Finally, add APP_URL (your Vercel app url) as an environment variable in Vercel and redeploy.
+
+You can check the logs in Vercel console or by running the below command.
+
+```bash
+vercel logs  <YOUR_APP_URL> -f
+```
+
+> [!WARNING]  
+> For production use, secure your environment variables as secrets on the Vercel platform.
+
 ### 2.1 - Fly Deployment
 
 Clone the Upsy repository:
@@ -141,40 +176,6 @@ fly logs
 > [!WARNING]  
 > Warning: For production use, secure your environment variables using secrets on the Fly platform.
 
-
-
-### 2.2 - Vercel Deployment
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)                              
-
-Deploy Upsy backend to Vercel by clicking the provided Deploy button. Ensure all environment variables are set correctly:
-
-```properties
-OPENAI_API_KEY= 
-UPSTASH_REDIS_REST_URL=
-UPSTASH_REDIS_REST_TOKEN=
-QSTASH_TOKEN=
-QSTASH_CURRENT_SIGNING_KEY=
-QSTASH_NEXT_SIGNING_KEY=
-UPSTASH_VECTOR_REST_URL=
-UPSTASH_VECTOR_REST_TOKEN=
-SLACK_ACCESS_TOKEN= -> Bot User OAuth Token
-SLACK_SIGNING_SECRET=
-APP_URL= -> your Vercel app url. you will add this after deployment 
-```
-
-Once, the project is deployed, go to your Slack dashboard. On the left menu click on `Event & Subscriptions`. Enter Vercel app url appending `/api/event` (example: [https://upsy.vercel.app/api/event](https://upsy.vercel.app/api/event)) to the Request URL input.
-
-
-Finally, add APP_URL (your Vercel app url) as an environment variable in Vercel and redeploy.
-
-You can check the logs in Vercel console or by running the below command.
-
-```bash
-vercel logs  <YOUR_APP_URL> -f
-```
-
-> [!WARNING]  
-> For production use, secure your environment variables as secrets on the Vercel platform.
 
 
 ## 3 - Testing Upsy
