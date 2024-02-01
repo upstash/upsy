@@ -147,8 +147,6 @@ export async function addDocument(metadata, content) {
 export async function addDocuments(messages, channelId, type) {
     console.log("adding documents:" + messages.length);
 
-    await index.reset();
-
     const vectors = await embeddings.embedDocuments(messages);
     const records = [];
     for (let i = 0; i < messages.length; i++) {
