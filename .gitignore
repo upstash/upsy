@@ -39,19 +39,5 @@ fly.toml
 .env
 
 package-lock.json
-.idea/misc.xml
-.idea/modules.xml
-.idea/upsy.iml
-.idea/vcs.xml
-.idea/copyright/profiles_settings.xml
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/inspectionProfiles/Project_Default.xml
-upsy-next/.idea/misc.xml
-upsy-next/.idea/modules.xml
-upsy-next/.idea/.gitignore
-.idea/.gitignore
-upsy-next/.idea/upsy-next.iml
-upsy-next/.idea/vcs.xml
-upsy-next/.idea/copyright/profiles_settings.xml
-upsy-next/.idea/inspectionProfiles/profiles_settings.xml
-upsy-next/.idea/inspectionProfiles/Project_Default.xml
+.idea
+

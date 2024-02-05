@@ -4,5 +4,5 @@
 .env
 Dockerfile
 fly.toml
-/upsy-next
-!/upsy-next/lib/llm.mjs
+/website
+!/website/lib/llm.mjs
