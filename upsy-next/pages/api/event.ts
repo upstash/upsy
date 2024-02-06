@@ -59,14 +59,16 @@ export default async function handler(
             token: process.env.QSTASH_TOKEN || "",
         });
 
-        let appUrl = process.env.VERCEL_URL || "";
+        let appUrl = process.env.APP_URL || "";
         if (appUrl.endsWith('/')) {
             appUrl = appUrl.slice(0, -1);
         }
+        if (!appUrl.startsWith('http')) {
+            appUrl = "https://" + appUrl;
+        }
 
         const qstashResponse = await c.publishJSON({
-            // url: `https://${appUrl}/api/message`,
-            url: "https://upsy.vercel.app/api/message",
+            url: `${appUrl}/api/message`,
             // or topic: "the name or id of a topic"
             body: {
                 event: body.event,
