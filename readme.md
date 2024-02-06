@@ -2,166 +2,192 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)
 
+Upsy is an open-source Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**. No matter how old or buried within a channel the answer to your question might be, Upsy will find relevant messages from its memory and respond immediately and only if it's sure of the answer. Upsy stores only data you explicitly allow it to process by adding it to specific channels and stores all data in your own database.
 
-Upsy is a unique Slack bot that acts like your colleague but with a superpower: it remembers all conversations. When you add Upsy to a Slack channel, it pulls all conversations from the channel's history and starts listening to new messages. If a question is asked, Upsy checks his memory context and answers if he finds a relevant response in the context, which comprises all messages across all channels.
-
-
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/demo.png" width="800">
-
+<img src="./static/demo.png" width="800">
 
 ## Features
 
-**Channel Conversations:** Add Upsy to any channel, and it will store the channel history into its memory. In the channel, Upsy jumps in only if a question is asked that has an answer in Upsy’s memory or if someone mentions Upsy in their message.
+**🧠 Unified Memory:** Upsy's memory works across channels you've added Upsy to. Get to-the-point answers even if the corresponding information is buried deep within another channel.
 
-**Direct Messages:** Communicate with Upsy via Direct Messages (DMs). Here, it functions similarly to ChatGPT. You can add new information to Upsy’s memory by interacting in DMs.
+**⌚ Works retrospectively:** Add Upsy to any channel, and it will store the channel history in its memory. The bot jumps in only if someone asks a question it can find a relevant answer to or if someone mentions Upsy in their message.
 
-**Unified Memory:** Upsy possesses a single, combined memory. This enables him to use information learned from one channel in another channel.
+**💡 Add data via DMs:** Communicate with Upsy via Direct Messages (DMs). You can even add new information to Upsy’s memory by interacting in DMs that it can then use to answer questions in any other channel.
 
-Upsy is an open-source project. You can deploy and run the backend and integrate it into your Slack channel. The code is customizable, allowing you to tailor Upsy’s behavior to your preferences. We will guide you through setting up Upsy for your Slack workspace step by step.
+## How Upsy works
 
-## Stack
+Upsy is an open-source project. You have complete control over the code, and all information Upsy retrieves is stored securely in your own Upstash database. We've chosen convenient defaults that work great out of the box, but the code is fully customizable for you to tailor Upsy to your needs. Here's an overview of how it works:
+
+<img src="./static/how-upsy-works.png" width="800">
+
+## Upsy's defaults
+
+We've chosen the following tech stack because it works reliably out of the box. Because of the modular design, you can completely customize any part of Upsy to fit your needs.
 
 **Backend:** Node.js ([Fly.io](https://fly.io) version), Next.js ([Vercel](https://vercel.com) version)
 
-**AI Integration:** OpenAI for embedding and chat API
+**AI Integration:** OpenAI API
 
-**Data Storage:** Upstash Vector for vector store, Upstash Redis for chat history
+**Data Storage:** Upstash Vector & Upstash Redis
 
 **LLM Orchestration:** [Langchain](https://langchain.com)
 
 **Deployment Options:** [Fly.io](https://fly.io), [Vercel](https://vercel.com)
 
-## 0 - Prerequisites
+# Creating your own Upsy
 
-Create an [OpenAI](https://openai.com) account to obtain an API key. Set up an [Upstash](https://console.upstash.com) account and create one Redis and one Vector database. These keys will be required as environment variables in the backend deployment step.
+## 1 - Getting Started
 
-## 1 - Slack App Set up
+To get started, you'll need an [OpenAI](https://openai.com) account and an [Upstash](https://console.upstash.com) account. After signing in to Upstash, create one Redis and one Vector database - these will later contain your Slack data. Unless you change the default configuration, choose a dimension of 1536 for your Upstash Vector database. Simply creating these databases is enough for now; we'll get back to this step in the setup.
 
-Create a Slack app in your team account. Go to https://api.slack.com/apps, click on Create New App, then select From an app manifest. After selecting your workspace, copy and paste the below configuration into the JSON editor:
+## 2 - Slack Setup
+
+To create a new Slack app in your team account, go to https://api.slack.com/apps, click `Create New App`, then select `from an app manifest`. After selecting your workspace, copy and paste the below configuration into the JSON editor:
 
 ```json
 {
-    "display_information": {
-        "name": "upsy",
-        "description": "Your new mate on Slack. Powered by AI.",
-        "background_color": "#000000"
-    },
-    "features": {
-        "bot_user": {
-            "display_name": "upsy",
-            "always_online": true
-        }
-    },
-    "oauth_config": {
-        "scopes": {
-            "bot": [
-                "app_mentions:read",
-                "channels:history",
-                "channels:join",
-                "channels:read",
-                "chat:write",
-                "groups:history",
-                "im:history",
-                "im:read",
-                "im:write",
-                "im:write.invites",
-                "mpim:history",
-                "reactions:read",
-                "reactions:write",
-                "users:read",
-                "groups:read",
-                "mpim:read"
-            ]
-        }
-    },
-    "settings": {
-        "event_subscriptions": {
-            "request_url": "https://example.com/",
-            "bot_events": [
-                "member_joined_channel",
-                "member_left_channel",
-                "message.channels",
-                "message.groups",
-                "message.im",
-                "message.mpim"
-            ]
-        },
-        "org_deploy_enabled": false,
-        "socket_mode_enabled": false,
-        "token_rotation_enabled": false
+  "display_information": {
+    "name": "upsy",
+    "description": "Your new mate on Slack. Powered by AI.",
+    "background_color": "#000000"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "upsy",
+      "always_online": true
     }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "app_mentions:read",
+        "channels:history",
+        "channels:join",
+        "channels:read",
+        "chat:write",
+        "groups:history",
+        "im:history",
+        "im:read",
+        "im:write",
+        "im:write.invites",
+        "mpim:history",
+        "reactions:read",
+        "reactions:write",
+        "users:read",
+        "groups:read",
+        "mpim:read"
+      ]
+    }
+  },
+  "settings": {
+    "event_subscriptions": {
+      "request_url": "https://example.com/",
+      "bot_events": [
+        "member_joined_channel",
+        "member_left_channel",
+        "message.channels",
+        "message.groups",
+        "message.im",
+        "message.mpim"
+      ]
+    },
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
 }
 ```
 
 Click on `Create`.
 
-After clicking on Create, go to OAuth & Permissions in the App dashboard, click on Install to Workspace, and install it. You will then have an access token to be used in the next step.
+After clicking on Create:
 
-Congratulations, you've created your Slack app. We will revisit this dashboard to copy Slack tokens in the next step.
+- go to OAuth & Permissions in the App dashboard
+- click `Install to Workspace` and install
 
-## 2 - Backend Deployment
+Congratulations, you've created your Slack app! 🎉 Keep this dashboard open because we'll need the generated Slack tokens in the next step.
 
-We have two options for hosting our application: deploying to Fly.io or Vercel.
+## 3 - Backend Deployment
 
+We have two options for hosting our application: Fly.io or Vercel. This decision comes down to personal preference and if you already have experience with either one. Both are simple, and we can get set up and running in minutes.
 
-### 2.1 - Vercel Deployment
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)                              
+### 3.1 - Vercel Deployment
 
-Deploy Upsy backend to Vercel by clicking the provided Deploy button. Ensure all environment variables are set correctly:
+You can deploy Upsy to Vercel in about two clicks by using the following button:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)
+
+For the deployment to work, set the following environment variables in your Vercel dashboard under `Settings > Environment Variables`:
 
 ```properties
-OPENAI_API_KEY= 
+# Retrieved here: https://platform.openai.com/api-keys
+OPENAI_API_KEY=
+
+# Retrieved here: https://console.upstash.com/
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
+
+# Retrieved here: https://console.upstash.com/qstash
 QSTASH_TOKEN=
 QSTASH_CURRENT_SIGNING_KEY=
 QSTASH_NEXT_SIGNING_KEY=
+
+# Retrieved here: https://console.upstash.com/vector
 UPSTASH_VECTOR_REST_URL=
 UPSTASH_VECTOR_REST_TOKEN=
-SLACK_ACCESS_TOKEN= -> Bot User OAuth Token
+
+# Retrieved from the Slack dashboard we just created
+# SLACK_ACCESS_TOKEN is the bot user OAuth token
+SLACK_ACCESS_TOKEN=
 SLACK_SIGNING_SECRET=
-APP_URL= -> your Vercel app url. you will add this after deployment 
+
+# Your Vercel app url - we'll add this after deployment
+APP_URL=
 ```
 
 > [!NOTE]  
-> Yes, we know it is ugly to enter so many env variables for Upstash products. We will soon improve this to require a single token.
+> We know entering so many env variables is not very convenient. We will soon improve this so it only requires a single token. 👀
 
-Once, the project is deployed, go to your Slack dashboard. On the left menu click on `Event & Subscriptions`. Enter Vercel app url appending `/api/event` (example: [https://upsy.vercel.app/api/event](https://upsy.vercel.app/api/event)) to the Request URL input.
+Now, let's hit the big `Deploy` button on Vercel. Once we deployed our project, Vercel will give us the URL for this deployment. Copy this URL, i.e., `https://your-upsy.vercel.app` and head to your Slack dashboard. For the `Request URL input` in Slack, enter this Vercel domain and append `/api/event` to it. The final result looks like this:
 
+`https://your-upsy.vercel.app/api/event`
 
-Finally, add APP_URL (your Vercel app url) as an environment variable in Vercel and redeploy.
+Lastly, add your deployment URL as the `APP_URL` environment variable to Vercel and redeploy.
 
-You can check the logs in Vercel console or by running the below command.
+> 🔥 **Pro Tip**
+>
+> Vercel allows you to see runtime logs in case you're curious about what Upsy is doing under the hood when a message on Slack comes in!
 
-```bash
-vercel logs  <YOUR_APP_URL> -f
-```
+ 
 
-> [!WARNING]  
-> For production use, secure your environment variables as secrets on the Vercel platform.
-
-### 2.1 - Fly Deployment
+### 3.1 - Fly.io Deployment
 
 Clone the Upsy repository:
 
 ```bash
 git clone git@github.com:upstash/upsy.git
-```                                      
-                          
+```
+
 Rename `fly.toml.example` to `fly.toml` and set the environment variables correctly.
 
 ```properties
 
 [env]
+# Retrieved here: https://platform.openai.com/api-keys
 OPENAI_API_KEY=
+
+# Retrieved here: https://console.upstash.com/
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
+
+# Retrieved here: https://console.upstash.com/vector
 UPSTASH_VECTOR_REST_URL=
 UPSTASH_VECTOR_REST_TOKEN=
+
+# Retrieved from the Slack dashboard we just created
 SLACK_ACCESS_TOKEN= -> Bot User OAuth Token
 SLACK_SIGNING_SECRET=
 ```
-
 
 Deploy your app to Fly.io by running the below command:
 
@@ -169,84 +195,71 @@ Deploy your app to Fly.io by running the below command:
 fly deploy
 ```
 
-Monitor the logs:
+Just like Vercel, fly.io also allows you to see runtime logs in case you're curious about what Upsy is doing under the hood when a message on Slack comes in! Simply run:
 
 ```bash
 fly logs
 ```
 
-> [!WARNING]  
-> Warning: For production use, secure your environment variables using secrets on the Fly platform.
+## 4 - Testing Upsy
 
+The simplest way to test the integration is by asking Upsy questions via direct messages or adding it to a channel with prior messages. It'll jump into the conversation to answer questions if it's confident in the answer or will respond if you mention it directly.
 
+> 🔥 **Pro Tip**
+>
+> Once you add Upsy to a channel or send it a direct message, check your Upstash Vector data browser. You should see the data appearing here.
 
-## 3 - Testing Upsy
+In addition to keeping a long history of the entire chat to draw answers from, Upsy also keeps a short-term memory to provide fast, accurate responses to recent chat topics. Test this by messaging a number and then ask to increment that number :)
 
-The simplest way to test the integration is by asking questions to Upsy in DM. You can also add Upsy to a channel and ask questions there. Upsy answers questions in the channel only if he knows the answer. However, if you mention Upsy in the question, he will try to answer even if he does not know the answer.
-
-When you add Upsy to a channel, it will copy history to Upstash Vector. Therefore, add Upsy to a channel and then ask a question that is mentioned in the channel history. You can also check the Upstash Vector dashboard to see if the channel history is stored in the vector db.
-
-In addition to Vector storage, Upsy also keeps a short-term conversation memory. To test this, you can simply say a number, and Upsy will remember it. Afterwards, you can ask Upsy to increment the number in the next message.
-
-You can provide new information to Upsy in DM and ask about it in a public channel. Upsy should answer correctly.
-
-
-
-## How does it work?
-Upsy runs on RAG architecture. So when a message is received by Upsy backend it collects the context from Upstash Vector and sends it to OpenAI for embedding. Morevoer it collects the conversation history from Upstash Redis. Then it sends the question, history and context to Langchain to get the answer. Finally, it sends the answer to Slack.   
-
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/architecture.png" width="800">
-
-<br/>
-<br/>
-
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png" width="600">
-
+Because we've built Upsy to work cross-channel with unified memory, you can always add additional information via direct messages, which it then uses to answer questions in channels and vice-versa.
 
 ### Troubleshooting
 
+**DM Issues:** If you see "Sending messages to this app has been turned off" in the DM screen of Upsy, try restarting your Slack. If that doesn't resolve the issue, you can remove Upsy from your workspace, reinstall it, and approve the requested scopes.
 
-**DM Issues:** If you see "Sending messages to this app has been turned off" in the DM screen of Upsy, then you can try restarting your Slack. If the issue is not resolved, you can remove Upsy from your workspace, reinstall it, and approve the requested scopes.
+**Non-responsiveness:** If Upsy appears online but does not answer back:
 
-**Non-responsiveness:** If Upsy appears online but never answers back, things to check include:
-- Check the logs in Vercel or Fly console.
-- If you are running on Vercel, check the logs on QStash console.
-- Check if your Slack token and signing keys are correct.
+- Check the runtime logs in Vercel or the Fly.io console
+- If you deployed to Vercel, check the logs in the QStash console
+- Verify that your Slack token and signing keys are correct
 
-**Context Awareness:** If Upsy answers but is not aware of the context (channel history), please do the following:
+**Memory not working:**
+If Upsy answers but is not aware of the channel history to answer your questions:
 
-- Verify if Upsy pulls the history and adds it to Vector when you add Upsy to a channel by checking the logs in Vercel or Fly console.
-- Check the Upstash Vector dashboard to confirm if the channel history is stored in the vector.
-
-**Behavior Adjustment:** If you think Upsy talks too much or be intrusive:
-- Check out the code and update the prompts in llm.mjs file. You can also change the `temperature` parameter to make Upsy more talkative or less talkative. You need to deploy the application.
+- Verify that Upsy has indexed the chat history via the Upstash Vector dashboard, where you should see this data appearing
+- Check the runtime logs on Vercel or the Fly.io console after adding it to a channel; you should see logs indicating that the indexing process has started
 
 ### Development
-Enable Socket mode from Slack dashboard for easier development.
 
-For Fly version use the root folder. 
+> 🔥 **Pro Tip**
+>
+> Enable the `Socket mode` in your Slack dashboard. This mode allows your app to use the Events API without exposing a public HTTP Request URL.
+
+To get started in development for a Fly.io deployment, use the root folder:
+
 ```bash
    npm install
    node index.js
 ```
 
-For Vercel version use the `upsy-next` folder.
+If you plan to deploy to Vercel, use the `upsy-next` folder for development:
+
 ```bash
    cd upsy-next
    npm install
    npm run dev
 ```
 
-## Future Work
-Upsy is a work in progress. We will be adding more features and improving the current ones. We hope to receive support from the community through contributions. Here are some of the features we plan to add.
+## Future Work and Contributing
+
+Upsy is a work in progress, so we'll add more features and improve the current ones. We've collected a few ideas we believe would make Upsy an even more helpful companion:
 
 - Add documents to the context so that Upsy can memorize and use them as context.
 
-- Add a web interface to manage Upsy so that users can add new information to Upsy’s memory via the web interface and configure Upsy’s behavior.
+- Add a web interface to manage Upsy so you can add new information to Upsy’s memory via the web interface and configure Upsy’s behavior
 
-- More proactive Upsy - Upsy will initiate conversations with you or respond to welcome, birthday, etc. messages.
+- More proactive Upsy - Upsy will initiate conversations with you or respond to welcome, birthday, etc. messages
 
-- Ability to choose personal characters for Upsy, such as ones that are friendlier, funnier, or more serious, etc.
+- Ability to choose personal characters for Upsy, such as friendlier, funnier, or more serious
 
-Upsy is open source. We are looking for your contributions. You can contribute by adding new features, fixing bugs, improving the documentation, writing blog posts, and sharing on social media, among other things.
-
+If one of these ideas sounds like something you'd like to work on, contributions are very welcome! You can contribute by adding new features, fixing bugs, improving the documentation, writing blog posts, or by sharing Upsy on social media.
