@@ -113,6 +113,8 @@ After clicking on Create:
 - go to OAuth & Permissions in the App dashboard
 - click `Install to Workspace` and install
 
+One last step is to enable Upsy for direct messages. Go to your App Settings page and go to App Home and set the checkbox for "Allow users to send Slash commands and messages from the messages tab".
+
 Congratulations, you've created your Slack app! 🎉 Keep this dashboard open because we'll need the generated Slack tokens in the next step.
 
 ## 3 - Backend Deployment
@@ -212,7 +214,7 @@ fly logs
 
 ## 4 - Testing Upsy
 
-Once you complete the deployment step, you can install it to your Slack workspace. If Upsy looks unresponsive check the troubleshhoting section below.
+Once you complete the deployment step, you can install it to your Slack workspace. If Upsy looks unresponsive check the troubleshooting section below.
 
 The simplest way to test the integration is by asking Upsy questions via direct messages or adding it to a channel with prior messages. It'll jump into the conversation to answer questions if it's confident in the answer or will respond if you mention it directly.
 
