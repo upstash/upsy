@@ -10,17 +10,25 @@ Upsy is an open-source Slack bot that remembers your conversations to provide **
 
 **🧠 Unified Memory:** Upsy's memory works across channels you've added Upsy to. Get to-the-point answers even if the corresponding information is buried deep within another channel.
 
-**⌚ Works retrospectively:** Add Upsy to any channel, and it will store the channel history in its memory. The bot jumps in only if someone asks a question it can find a relevant answer to or if someone mentions Upsy in their message.
+**⌚ Works Retrospectively:** Add Upsy to any channel, and it will store the channel history in its memory. The bot jumps in only if someone asks a question it can find a relevant answer to or if someone mentions Upsy in their message.
 
-**💡 Add data via DMs:** Communicate with Upsy via Direct Messages (DMs). You can even add new information to Upsy’s memory by interacting in DMs that it can then use to answer questions in any other channel.
+**💡 Add Data via DMs:** Communicate with Upsy via Direct Messages (DMs). You can even add new information to Upsy’s memory by interacting in DMs that it can then use to answer questions in any other channel.
 
-## How Upsy works
+## How Upsy Works
 
-Upsy is an open-source project. You have complete control over the code, and all information Upsy retrieves is stored securely in your own Upstash database. We've chosen convenient defaults that work great out of the box, but the code is fully customizable for you to tailor Upsy to your needs. Here's an overview of how it works:
+Upsy is an open-source project. You have complete control over the code, and all information Upsy retrieves is stored securely in your own Upstash database. We've chosen convenient defaults that work great out of the box, but the code is fully customizable for you to tailor Upsy to your needs. Here's an overview of **how it works under the hood**:
 
 <img src="./static/how-upsy-works.png" width="800">
 
-## Upsy's defaults
+<br />
+<br />
+
+And here's how Upsy knows which messages to store and which ones to answer:
+
+<img src="./static/how-upsy-thinks.png" width="800">
+
+
+## Upsy's Defaults
 
 We've chosen the following tech stack because it works reliably out of the box. Because of the modular design, you can completely customize any part of Upsy to fit your needs.
 
@@ -34,7 +42,7 @@ We've chosen the following tech stack because it works reliably out of the box. 
 
 **Deployment Options:** [Fly.io](https://fly.io), [Vercel](https://vercel.com)
 
-# Creating your own Upsy
+# Creating Your Own Upsy
 
 ## 1 - Getting Started
 
