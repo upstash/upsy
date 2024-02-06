@@ -5,7 +5,9 @@
 
 Upsy is a unique Slack bot that acts like your colleague but with a superpower: it remembers all conversations. When you add Upsy to a Slack channel, it pulls all conversations from the channel's history and starts listening to new messages. If a question is asked, Upsy checks his memory context and answers if he finds a relevant response in the context, which comprises all messages across all channels.
 
-// todo image
+
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/demo.png" width="800">
+
 
 ## Features
 
@@ -194,6 +196,9 @@ You can provide new information to Upsy in DM and ask about it in a public chann
 Upsy runs on RAG architecture. So when a message is received by Upsy backend it collects the context from Upstash Vector and sends it to OpenAI for embedding. Morevoer it collects the conversation history from Upstash Redis. Then it sends the question, history and context to Langchain to get the answer. Finally, it sends the answer to Slack.   
 
 <img src="https://raw.githubusercontent.com/upstash/upsy/master/architecture.png" width="800">
+
+<br/>
+<br/>
 
 <img src="https://raw.githubusercontent.com/upstash/upsy/master/algorithm.png" width="600">
 
