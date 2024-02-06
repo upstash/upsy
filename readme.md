@@ -212,6 +212,8 @@ fly logs
 
 ## 4 - Testing Upsy
 
+Once you complete the deployment step, you can install it to your Slack workspace. If Upsy looks unresponsive check the troubleshhoting section below.
+
 The simplest way to test the integration is by asking Upsy questions via direct messages or adding it to a channel with prior messages. It'll jump into the conversation to answer questions if it's confident in the answer or will respond if you mention it directly.
 
 > 🔥 **Pro Tip**
