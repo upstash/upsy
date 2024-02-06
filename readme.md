@@ -193,7 +193,8 @@ UPSTASH_VECTOR_REST_URL=
 UPSTASH_VECTOR_REST_TOKEN=
 
 # Retrieved from the Slack dashboard we just created
-SLACK_ACCESS_TOKEN= -> Bot User OAuth Token
+# SLACK_ACCESS_TOKEN is the bot user OAuth token
+SLACK_ACCESS_TOKEN=
 SLACK_SIGNING_SECRET=
 ```
 
