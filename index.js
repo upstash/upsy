@@ -128,6 +128,8 @@ async function saveChannelHistory(channelId) {
     console.log(msg);
 
     const messageLowerCase = msg.toLowerCase();
+    let upsyMentioned = messageLowerCase.includes("upsy") || messageLowerCase.includes(botId.toLowerCase());
+    
     let isItQuestion = false;
     if (event.channel_type === "im") {
       response = await llm.query(
@@ -145,8 +147,9 @@ async function saveChannelHistory(channelId) {
     } else if (event.channel_type === "channel") {
       isItQuestion = await llm.isQuestion(msg);
 
-      if (isItQuestion || messageLowerCase.includes("upsy")) {
-        if (messageLowerCase.includes("upsy")) {
+      if (isItQuestion || upsyMentioned) {
+        if (upsyMentioned) {
+          console.log("upsy mentioned");
           response = await llm.query(
             "im",
             event.text,
