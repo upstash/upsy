@@ -170,7 +170,7 @@ Lastly, add your deployment URL as the `APP_URL` environment variable to Vercel 
 
  
 
-### 3.1 - Fly.io Deployment
+### 3.2 - Fly.io Deployment
 
 Clone the Upsy repository:
 
