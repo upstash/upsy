@@ -162,6 +162,13 @@ Deploy your app to Fly.io by running the below command:
 fly deploy
 ```
 
+
+
+Once we deployed our project, Fly will give us the URL for this deployment. Copy the URL of your Fly app, i.e., https://your-upsy.fly.dev and head to your Slack dashboard. Find the Event Subscriptions menu on the sidebar and enter the URL  appending /api/event to  Request URL input field in Slack,  The final result looks like this:
+
+`https://your-upsy.fly.dev/api/event`
+
+
 Fly.io allows you to see runtime logs in case you're curious about what Upsy is doing under the hood when a message on Slack comes in! Simply run:
 
 ```bash
