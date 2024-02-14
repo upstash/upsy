@@ -10,7 +10,7 @@ Upsy is an open source Slack bot that remembers your conversations to provide **
 1. [Features](#user-content-features)
 2. [Setup](#user-content-setup)
 3. [How Upsy Works](#user-content-how-upsy-works)
-4. [Upsy's Defaults](#user-content-upsy-s-defaults)
+4. [Upsy's Defaults](#user-content-upsys-defaults)
 5. [Testing](#user-content-testing)
 6. [Troubleshooting](#user-content-troubleshooting)
 7. [Development](#user-content-development)
@@ -173,9 +173,6 @@ Upsy is an open-source project. You have complete control over the code, and all
 <br/>
 
 And here's how Upsy knows which messages to store and which ones to answer:
-
-<br/>
-<br/>
 
 <img src="./static/how-upsy-thinks.png" width="800">
 </details>
