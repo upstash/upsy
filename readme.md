@@ -232,6 +232,10 @@ Because we've built Upsy to work cross-channel with unified memory, you can alwa
 If Upsy answers but is not aware of the channel history to answer your questions:
 - Verify that Upsy has indexed the chat history via the Upstash Vector dashboard, where you should see this data appearing
 - Check the runtime logs on the Fly.io after adding it to a channel; you should see logs indicating that the indexing process has started
+
+**Fly deployment issue**
+If the `fly deploy` command looks stuck, try `fly deploy --local-only` which builds the image locally then push it to the fly.
+
 </details>
 
 
