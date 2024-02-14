@@ -128,8 +128,10 @@ async function saveChannelHistory(channelId) {
     console.log(msg);
 
     const messageLowerCase = msg.toLowerCase();
-    let upsyMentioned = messageLowerCase.includes("upsy") || messageLowerCase.includes(botId.toLowerCase());
-    
+    let upsyMentioned =
+      messageLowerCase.includes("upsy") ||
+      messageLowerCase.includes(botId.toLowerCase());
+
     let isItQuestion = false;
     if (event.channel_type === "im") {
       response = await llm.query(
