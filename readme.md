@@ -158,8 +158,6 @@ fly logs
 ```
 
 
----
-
 <details>
 <summary>
 <h2>How Upsy Works</h2>
@@ -177,7 +175,6 @@ And here's how Upsy knows which messages to store and which ones to answer:
 <img src="./static/how-upsy-thinks.png" width="800">
 </details>
 
----
 
 <details>
 <summary>
@@ -193,7 +190,6 @@ We've chosen the following tech stack because it works reliably out of the box. 
 - Deployment Option: **[Fly.io](https://fly.io)**
 </details>
 
----
 
 <details>
 <summary>
@@ -213,7 +209,6 @@ In addition to keeping a long history of the entire chat to draw answers from, U
 Because we've built Upsy to work cross-channel with unified memory, you can always add additional information via direct messages, which it then uses to answer questions in channels and vice-versa.
 </details>
 
----
 
 <details>
 <summary>
@@ -233,7 +228,6 @@ If Upsy answers but is not aware of the channel history to answer your questions
 - Check the runtime logs on the Fly.io after adding it to a channel; you should see logs indicating that the indexing process has started
 </details>
 
----
 
 <details>
 <summary>
@@ -252,7 +246,6 @@ To get started in development for a Fly.io deployment, use the root folder:
 ```
 </details>
 
----
 
 <details>
 <summary>
