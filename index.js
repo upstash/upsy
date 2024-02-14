@@ -2,7 +2,7 @@ import "dotenv/config";
 import SlackBolt from "@slack/bolt";
 import moment from "moment";
 import { Redis } from "@upstash/redis";
-import * as llm from "./upsy-next/lib/llm.mjs";
+import * as llm from "./lib/llm.mjs";
 
 const redis = Redis.fromEnv();
 

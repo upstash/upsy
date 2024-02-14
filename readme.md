@@ -1,7 +1,5 @@
 # Upsy: Your new mate on Slack. Powered by AI.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)
-
 Upsy is an open source Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**. No matter how old or buried within a channel the answer to your question might be, Upsy will find relevant messages from its memory and respond immediately and only if it's sure of the answer. Upsy stores only data you explicitly allow it to process by adding it to specific channels and stores all data in your own database.
 
 <img src="./static/demo.png" width="800">
@@ -32,7 +30,7 @@ And here's how Upsy knows which messages to store and which ones to answer:
 
 We've chosen the following tech stack because it works reliably out of the box. Because of the modular design, you can completely customize any part of Upsy to fit your needs.
 
-**Backend:** Node.js ([Fly.io](https://fly.io) version), Next.js ([Vercel](https://vercel.com) version)
+**Backend:** Node.js 
 
 **AI Integration:** OpenAI API
 
@@ -40,7 +38,7 @@ We've chosen the following tech stack because it works reliably out of the box. 
 
 **LLM Orchestration:** [Langchain](https://langchain.com)
 
-**Deployment Options:** [Fly.io](https://fly.io), [Vercel](https://vercel.com)
+**Deployment Option:** [Fly.io](https://fly.io)
 
 # Creating Your Own Upsy
 
@@ -51,6 +49,10 @@ To get started, you'll need an [OpenAI](https://openai.com) account and an [Upst
 ## 2 - Slack Setup
 
 To create a new Slack app in your team account, go to https://api.slack.com/apps, click `Create New App`, then select `from an app manifest`. After selecting your workspace, copy and paste the below configuration into the JSON editor:
+
+<details>
+<summary>app manifest 👇 </summary>
+
 
 ```json
 {
@@ -106,6 +108,9 @@ To create a new Slack app in your team account, go to https://api.slack.com/apps
 }
 ```
 
+</details>
+
+
 Click on `Create`.
 
 After clicking on Create:
@@ -119,56 +124,7 @@ Congratulations, you've created your Slack app! 🎉 Keep this dashboard open be
 
 ## 3 - Backend Deployment
 
-We have two options for hosting our application: Fly.io or Vercel. This decision comes down to personal preference and if you already have experience with either one. Both are simple, and we can get set up and running in minutes.
-
-### 3.1 - Vercel Deployment
-
-You can deploy Upsy to Vercel in about two clicks by using the following button:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fupstash%2Fupsy%2Ftree%2Fmaster%2Fupsy-next&env=OPENAI_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,QSTASH_TOKEN,QSTASH_NEXT_SIGNING_KEY,QSTASH_CURRENT_SIGNING_KEY,UPSTASH_VECTOR_REST_URL,UPSTASH_VECTOR_REST_TOKEN,SLACK_ACCESS_TOKEN,SLACK_SIGNING_SECRET&project-name=upsy&repository-name=upsy)
-
-For the deployment to work, set the following environment variables in your Vercel dashboard under `Settings > Environment Variables`:
-
-```properties
-# Retrieved here: https://platform.openai.com/api-keys
-OPENAI_API_KEY=
-
-# Retrieved here: https://console.upstash.com/
-UPSTASH_REDIS_REST_URL=
-UPSTASH_REDIS_REST_TOKEN=
-
-# Retrieved here: https://console.upstash.com/qstash
-QSTASH_TOKEN=
-QSTASH_CURRENT_SIGNING_KEY=
-QSTASH_NEXT_SIGNING_KEY=
-
-# Retrieved here: https://console.upstash.com/vector
-UPSTASH_VECTOR_REST_URL=
-UPSTASH_VECTOR_REST_TOKEN=
-
-# Retrieved from the Slack dashboard we just created
-# SLACK_ACCESS_TOKEN is the bot user OAuth token
-SLACK_ACCESS_TOKEN=
-SLACK_SIGNING_SECRET=
-
-# Your Vercel app url - we'll add this after deployment
-APP_URL=
-```
-
-> [!NOTE]  
-> We know entering so many env variables is not very convenient. We will soon improve this so it only requires a single token. 👀
-
-Now, let's hit the big `Deploy` button on Vercel. Once we deployed our project, Vercel will give us the URL for this deployment. Copy this URL, i.e., `https://your-upsy.vercel.app` and head to your Slack dashboard. For the `Request URL input` in Slack, enter this Vercel domain and append `/api/event` to it. The final result looks like this:
-
-`https://your-upsy.vercel.app/api/event`
-
-Lastly, add your deployment URL as the `APP_URL` environment variable to Vercel and redeploy.
-
-> 🔥 **Pro Tip**
->
-> Vercel allows you to see runtime logs in case you're curious about what Upsy is doing under the hood when a message on Slack comes in!
-
- 
+The backend is a simple Node application that runs Slack's Bolt SDK. We will deploy it on Fly, but it can be hosted anywhere that supports Node.
 
 ### 3.1 - Fly.io Deployment
 
@@ -206,7 +162,7 @@ Deploy your app to Fly.io by running the below command:
 fly deploy
 ```
 
-Just like Vercel, fly.io also allows you to see runtime logs in case you're curious about what Upsy is doing under the hood when a message on Slack comes in! Simply run:
+Fly.io allows you to see runtime logs in case you're curious about what Upsy is doing under the hood when a message on Slack comes in! Simply run:
 
 ```bash
 fly logs
@@ -232,15 +188,13 @@ Because we've built Upsy to work cross-channel with unified memory, you can alwa
 
 **Non-responsiveness:** If Upsy appears online but does not answer back:
 
-- Check the runtime logs in Vercel or the Fly.io console
-- If you deployed to Vercel, check the logs in the QStash console
+- Check the runtime logs in the Fly.io.
 - Verify that your Slack token and signing keys are correct
 
 **Memory not working:**
 If Upsy answers but is not aware of the channel history to answer your questions:
-
 - Verify that Upsy has indexed the chat history via the Upstash Vector dashboard, where you should see this data appearing
-- Check the runtime logs on Vercel or the Fly.io console after adding it to a channel; you should see logs indicating that the indexing process has started
+- Check the runtime logs on the Fly.io after adding it to a channel; you should see logs indicating that the indexing process has started
 
 ### Development
 
