@@ -126,7 +126,7 @@ Congratulations, you've created your Slack app! 🎉 Keep this dashboard open be
 
 The backend is a simple Node application that runs Slack's Bolt SDK. We will deploy it on Fly, but it can be hosted anywhere that supports Node.
 
-### 3.1 - Fly.io Deployment
+### 3.2 - Fly.io Deployment
 
 Clone the Upsy repository:
 
