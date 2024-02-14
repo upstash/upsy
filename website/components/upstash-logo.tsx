@@ -4,7 +4,7 @@ export interface Props extends HTMLProps<SVGSVGElement> {
   size?: number;
 }
 
-export default function UpstashLogo({ height = 26, ...props }: Props) {
+export default function UpstashLogo({ height = 28, ...props }: Props) {
   return (
     <svg
       role="img"
