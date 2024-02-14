@@ -75,7 +75,7 @@ async function saveChannelHistory(channelId) {
 (async () => {
   // Start your app
   await app.start(process.env.PORT || 3000);
-  console.log("⚡️ Bolt app is running!");
+  console.log("⚡️⚡️⚡️⚡️⚡️ Bolt app is running!");
 
   const result = await app.client.auth.test();
   console.log("Bot User ID:", result.user_id);
