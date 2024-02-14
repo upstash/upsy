@@ -141,6 +141,12 @@ SLACK_ACCESS_TOKEN=
 SLACK_SIGNING_SECRET=
 ```
 
+First create a Fly app by running:
+```bash
+fly launch
+```
+
+
 Deploy your app to Fly.io by running the below command:
 
 ```bash
