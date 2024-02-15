@@ -34,7 +34,7 @@ No matter how old or buried within a channel the answer to your question might b
 
 ### 1. Getting Started
 
-To get started, you'll need an [OpenAI](https://openai.com) account and an [Upstash](https://console.upstash.com) account. After signing in to Upstash, create one Redis and one Vector database - these will later contain your Slack data. Unless you change the default configuration, choose a dimension of 1536 for your Upstash Vector database. Simply creating these databases is enough for now; we'll get back to this step in the setup.
+To get started, you'll need an [OpenAI](https://openai.com), [Fly](https://fly.io/) and [Upstash](https://console.upstash.com) accounts. After signing in to Upstash, create one Redis and one Vector database - these will later contain your Slack data. Unless you change the default configuration, choose a dimension of 1536 for your Upstash Vector database. Simply creating these databases is enough for now; we'll get back to this step in the setup.
 
 ### 2. Slack Setup
 
