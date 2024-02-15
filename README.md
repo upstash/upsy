@@ -23,7 +23,7 @@ We've chosen the following tech stack because it works reliably out of the box. 
 
 - Backend: **Node.js**
 - AI Integration: **OpenAI API**
-- Data Storage: **Upstash Vector & Upstash Redis**
+- Data Storage: **[Upstash Vector](https://upstash.com/docs/vector/overall/whatisvector) & [Upstash Redis](https://upstash.com/docs/redis/overall/getstarted)**
 - LLM Orchestration: **[Langchain](https://langchain.com)**
 - Deployment Option: **[Fly.io](https://fly.io)**
 
