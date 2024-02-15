@@ -7,14 +7,25 @@ Upsy is an open source Slack bot that remembers your conversations to provide **
 <img src="./static/demo.png" width="700">
 
 
-1. [Features](#user-content-features)
-2. [Setup](#user-content-setup)
-3. [How Upsy Works](#user-content-how-upsy-works)
-4. [Upsy's Defaults](#user-content-upsys-defaults)
-5. [Testing](#user-content-testing)
-6. [Troubleshooting](#user-content-troubleshooting)
+1. [Tech Stack](#user-content-upsys-defaults)
+2. [Features](#user-content-features)
+3. [Setup](#user-content-setup)
+4. [Testing](#user-content-testing)
+5. [Troubleshooting](#user-content-troubleshooting)
+6. [How Upsy Works](#user-content-how-upsy-works)
 7. [Development](#user-content-development)
 8. [Contributing](#user-content-contributing)
+
+
+## Tech Stack
+
+We've chosen the following tech stack because it works reliably out of the box. Because of the modular design, you can completely customize any part of Upsy to fit your needs.
+
+- Backend: **Node.js**
+- AI Integration: **OpenAI API**
+- Data Storage: **Upstash Vector & Upstash Redis**
+- LLM Orchestration: **[Langchain](https://langchain.com)**
+- Deployment Option: **[Fly.io](https://fly.io)**
 
 
 ## Features
@@ -164,40 +175,6 @@ Fly.io allows you to see runtime logs in case you're curious about what Upsy is 
 fly logs
 ```
 
-
-<details>
-<summary>
-<h2>How Upsy Works</h2>
-</summary>
-
-Upsy is an open-source project. You have complete control over the code, and all information Upsy retrieves is stored securely in your own Upstash database. We've chosen convenient defaults that work great out of the box, but the code is fully customizable for you to tailor Upsy to your needs. Here's an overview of **how it works under the hood**:
-
-<img src="./static/how-upsy-works.png" width="800">
-
-<br/>
-<br/>
-
-And here's how Upsy knows which messages to store and which ones to answer:
-
-<img src="./static/how-upsy-thinks.png" width="800">
-</details>
-
-
-<details>
-<summary>
-<h2>Upsy's Defaults</h2>
-</summary>
-
-We've chosen the following tech stack because it works reliably out of the box. Because of the modular design, you can completely customize any part of Upsy to fit your needs.
-
-- Backend: **Node.js**
-- AI Integration: **OpenAI API**
-- Data Storage: **Upstash Vector & Upstash Redis**
-- LLM Orchestration: **[Langchain](https://langchain.com)**
-- Deployment Option: **[Fly.io](https://fly.io)**
-</details>
-
-
 <details>
 <summary>
 <h2>Testing</h2>
@@ -238,6 +215,26 @@ If Upsy answers but is not aware of the channel history to answer your questions
 If the `fly deploy` command looks stuck, try `fly deploy --local-only` which builds the image locally then push it to the fly.
 
 </details>
+
+
+<details>
+<summary>
+<h2>How Upsy Works</h2>
+</summary>
+
+Upsy is an open-source project. You have complete control over the code, and all information Upsy retrieves is stored securely in your own Upstash database. We've chosen convenient defaults that work great out of the box, but the code is fully customizable for you to tailor Upsy to your needs. Here's an overview of **how it works under the hood**:
+
+<img src="./static/how-upsy-works.png" width="800">
+
+<br/>
+<br/>
+
+And here's how Upsy knows which messages to store and which ones to answer:
+
+<img src="./static/how-upsy-thinks.png" width="800">
+</details>
+
+
 
 
 <details>
