@@ -104,9 +104,9 @@ To create a new Slack app in your team account, go to https://api.slack.com/apps
 After clicking on Create:
 
 - Go to OAuth & Permissions in the App dashboard
-- Click `Install to Workspace` and install
+- Click `Install to Workspace` and install.
 
-One last step is to enable Upsy for direct messages. Go to your App Settings page and go to App Home and set the checkbox for "Allow users to send Slash commands and messages from the messages tab".
+One last step is to enable Upsy for direct messages. Go to your `Features` > `App Home` and set the checkbox for "Allow users to send Slash commands and messages from the messages tab".
 
 Congratulations, you've created your Slack app! 🎉 Keep this dashboard open because we'll need the generated Slack tokens in the next step.
 
@@ -129,7 +129,7 @@ Rename `fly.toml.example` to `fly.toml` and set the environment variables correc
 # Retrieved here: https://platform.openai.com/api-keys
 OPENAI_API_KEY=
 
-# Retrieved here: https://console.upstash.com/
+# Retrieved here: https://console.upstash.com/   
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 
@@ -137,8 +137,9 @@ UPSTASH_REDIS_REST_TOKEN=
 UPSTASH_VECTOR_REST_URL=
 UPSTASH_VECTOR_REST_TOKEN=
 
-# Retrieved from the Slack dashboard we just created
-# SLACK_ACCESS_TOKEN is the bot user OAuth token
+# Retrieved from the Slack dashboard we just created. 
+# SLACK_ACCESS_TOKEN should start with xoxb-.  `Features > OAuth & Permissions`
+# SLACK_SIGNING_SECRET  `Settings > Basic Information`
 SLACK_ACCESS_TOKEN=
 SLACK_SIGNING_SECRET=
 ```
