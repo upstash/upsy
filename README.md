@@ -174,6 +174,7 @@ Fly.io allows you to see runtime logs in case you're curious about what Upsy is 
 ```bash
 fly logs
 ```
+Now we are ready to test Upsy!
 
 <details>
 <summary>
