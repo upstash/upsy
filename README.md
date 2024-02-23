@@ -2,10 +2,11 @@
 
 # Upsy: Your new mate on Slack. Powered by AI.
 
+
 > [!NOTE]  
-> **This project is in the Experimental Stage.**
-> 
-> We declare this project experimental to set clear expectations for your usage. There could be known or unknown bugs, the API could evolve, or the project could be discontinued if it does not find community adoption. While we cannot provide professional support for experimental projects, we’d be happy to hear from you if you see value in this project!
+> **This project is a Community Project.**
+>
+> The project is maintained and supported by the community. Upstash may contribute but does not officially support or assume responsibility for it.
 
 Upsy is an open source Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**.
 
