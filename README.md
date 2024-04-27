@@ -216,7 +216,40 @@ Congratulations, you've created your Slack app! 🎉 Keep this dashboard open be
 
 The backend is a simple Node application that runs Slack's Bolt SDK. We will deploy it on Fly, but it can be hosted anywhere that supports Node.
 
-#### 3.1. Fly.io Deployment
+#### 3.1. Local Deployment
+
+Clone the Upsy repository:
+
+```bash
+git clone git@github.com:upstash/upsy.git
+cd upsy/slack
+```
+
+Edit the environment variables in Dockerfile:
+
+```properties
+OPENAI_API_KEY=""
+UPSTASH_REDIS_REST_TOKEN=""
+UPSTASH_REDIS_REST_URL=""
+UPSTASH_VECTOR_REST_TOKEN=""
+UPSTASH_VECTOR_REST_URL=""
+SLACK_ACCESS_TOKEN=""
+SLACK_SIGNING_SECRET=""
+SLACK_APP_TOKEN=""
+```
+
+Run the following commands to start the server:
+
+```bash
+docker build -t upsy-slack .
+docker run -d -p 3000:3000 upsy-slack
+```
+
+Update the Request URL in the Slack dashboard (Features > Event Subscriptions) to point to your local server, you can use ngrok to expose your local server to the internet.
+
+example: `https://your-ngrok-url/slack/events`
+
+#### 3.2. Fly.io Deployment
 
 Clone the Upsy repository:
 
