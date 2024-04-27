@@ -1,6 +1,6 @@
 <img src="./static/upsy-logo.svg" height="52">
 
-# Upsy: Your new mate on Slack. Powered by AI.
+# Upsy: Your new mate on Discord & Slack. Powered by AI.
 
 
 > [!NOTE]  
@@ -8,7 +8,7 @@
 >
 > The project is maintained and supported by the community. Upstash may contribute but does not officially support or assume responsibility for it.
 
-Upsy is an open source Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**.
+Upsy is an open source Discord & Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**.
 
 <img src="./static/demo.png" width="700">
 
@@ -40,7 +40,7 @@ No matter how old or buried within a channel the answer to your question might b
 
 **🧠 Unified Memory:** Upsy's memory works across channels you've added Upsy to. Get to-the-point answers even if the corresponding information is buried deep within another channel.
 
-**🔒 Privacy Preserved:** Upsy only accesses data from the channel you add it to. It is open source and self-hosted. The communication between the Upsy server and Slack is encrypted.
+**🔒 Privacy Preserved:** Upsy only accesses data from the channel you add it to. It is open source and self-hosted. The communication between the Upsy server, Discord and Slack is encrypted.
 
 **⌚ Works Retrospectively:** Add Upsy to any channel, and it will store the channel history in its memory. The bot jumps in only if someone asks a question it can find a relevant answer to or if someone mentions Upsy in their message.
 
@@ -51,9 +51,93 @@ No matter how old or buried within a channel the answer to your question might b
 
 ### 1. Getting Started
 
-To get started, you'll need an [OpenAI](https://openai.com), [Fly](https://fly.io/) and [Upstash](https://console.upstash.com) accounts. After signing in to Upstash, create one Redis and one Vector database - these will later contain your Slack data. Unless you change the default configuration, choose a dimension of 1536 for your Upstash Vector database. Simply creating these databases is enough for now; we'll get back to this step in the setup.
+To get started, you'll need an [OpenAI](https://openai.com), [Fly](https://fly.io/), [Upstash](https://console.upstash.com), [Discord](https://discord.com/register) and [Slack](https://slack.com/get-started#/createnew) accounts. After signing in to Upstash, create one Redis and one Vector database - these will later contain your Slack data. Unless you change the default configuration, choose a dimension of 1536 for your Upstash Vector database. Simply creating these databases is enough for now; we'll get back to this step in the setup.
 
-### 2. Slack Setup
+
+## Discord Setup
+
+### Create a Discord Application
+
+Create an application at “https://discord.com/developers/applications".
+
+### Privileged Gateway Intents
+
+To enable the bot to access the message history, you need to enable the `Privileged Gateway Intents`. Go to the `Bot` section of your Discord application and enable the `MESSAGE CONTENT INTENT ` and `SERVER MEMBERS INTENT`.
+
+### Default Install Settings 
+
+Under Settings > Default Install Settings, update scopes and permissions as follows:
+
+Scopes: applications.commands, bot
+Bot Permissions: Send Messages, Read Message History, Use Slash Commands, Add Reactions, Embed Links, Read Messages/View Channels, Send Messages in Threads, Use External Emojis, Send TTS Messages.
+
+
+### Get your Bot Token
+Reset token in the bot section of your Discord application.
+Your token should start with "MTIzMz…"
+
+### Put your token into config/config.json file
+
+```json
+{
+    "client": {
+        "token": "MTIzMz...",
+    },
+} 
+```
+### Get your Application ID and put it into config/config.json file
+
+You can find your application ID in the General Information section of your Discord application. 
+
+```json
+{
+    "client": {
+		    "id":"123333333333333333",
+        "token": "MTIzMz...",
+    },
+} 
+```
+
+### Set the environment variables in Dockerfile or fly.toml
+
+```properties
+OPENAI_API_KEY=""
+UPSTASH_REDIS_REST_TOKEN=""
+UPSTASH_REDIS_REST_URL=""
+UPSTASH_VECTOR_REST_TOKEN=""
+UPSTASH_VECTOR_REST_URL=""
+```
+
+### You can either run the bot locally or deploy it to Fly.io
+
+#### Local Deployment
+
+```bash
+docker build -t upsy-discord .
+docker run -d -p 3001:3001 upsy-discord
+```
+
+#### Fly.io Deployment
+
+```bash
+fly launch
+fly deploy
+```
+
+### Add the bot to your Discord server
+
+To add the bot to your Discord server, you need to generate an OAuth2 URL. Go to the Installation section of your Discord application and under Install Link, select the discord provided link. You can then add the bot to your server.
+
+At this point, you should see the bot online in your Discord server.
+
+### Notes:
+
+Your initial discord commands will be registered at docker build time.
+For deleting, updating or adding new commands, you need to run `npm run commands:*` commands.
+
+Discord template used in this project is:  [Discord-Bot-TypeScript-Template](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
+
+## Slack Setup
 
 To create a new Slack app in your team account, go to https://api.slack.com/apps, click `Create New App`, then select `from an app manifest`. After selecting your workspace, copy and paste the below configuration into the JSON editor:
 
@@ -91,7 +175,8 @@ To create a new Slack app in your team account, go to https://api.slack.com/apps
         "reactions:write",
         "users:read",
         "groups:read",
-        "mpim:read"
+        "mpim:read",
+        "files:read"
       ]
     }
   },
@@ -137,12 +222,12 @@ Clone the Upsy repository:
 
 ```bash
 git clone git@github.com:upstash/upsy.git
+cd upsy/slack
 ```
 
-Rename `fly.toml.example` to `fly.toml` and set the environment variables correctly.
+Edit the environment variables in Dockerfile or fly.toml:
 
 ```properties
-[env]
 # Retrieved here: https://platform.openai.com/api-keys
 OPENAI_API_KEY=
 
@@ -157,8 +242,10 @@ UPSTASH_VECTOR_REST_TOKEN=
 # Retrieved from the Slack dashboard we just created. 
 # SLACK_ACCESS_TOKEN should start with xoxb-.  `Features > OAuth & Permissions`
 # SLACK_SIGNING_SECRET  `Settings > Basic Information`
+# SLACK_APP_TOKEN should start with xapp-. `Settings > Basic Information > App-Level Tokens`
 SLACK_ACCESS_TOKEN=
 SLACK_SIGNING_SECRET=
+SLACK_APP_TOKEN=
 ```
 
 First create a Fly app by running `fly launch`. Say `Yes` to the question `Would you like to copy its configuration to the new app?`
