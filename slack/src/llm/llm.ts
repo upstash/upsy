@@ -69,7 +69,7 @@ export async function isQuestion(question: string): Promise<boolean> {
 export async function isWorthReaction(sentence: string): Promise<string> {
   const chain = new ConversationChain({ llm: model });
   const response = await chain.call({
-    input: `Return a emoji text for slack if the sentence feels like: "angry" return side eyes, "questions" return thinking face, "announcements" return tada or "jokes" return laughing face . Reactions must be text format like tada. (Return JUST the emoji text, If no emoji text returned just say NO)"  -> Message: ${sentence}`,
+    input: `If the sentence feels like angry return "eyes", questions return "thinking_face", announcements return "tada" and jokes return "laughing". Returned text must be without : and " . (Return JUST the emoji text, If no text returned just say NO)"  -> Message: ${sentence}`,
   });
 
   console.log(response);
