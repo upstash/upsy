@@ -69,6 +69,7 @@ To enable the bot to access the message history, you need to enable the `Privile
 Under Settings > Default Install Settings, update scopes and permissions as follows:
 
 Scopes: applications.commands, bot
+
 Bot Permissions: Send Messages, Read Message History, Use Slash Commands, Add Reactions, Embed Links, Read Messages/View Channels, Send Messages in Threads, Use External Emojis, Send TTS Messages.
 
 
