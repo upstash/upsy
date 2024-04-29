@@ -10,8 +10,17 @@
 
 Upsy is an open source Discord & Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**.
 
+## Demo: 
+
+[Discord Bot Link](https://discord.com/oauth2/authorize?client_id=1220739209321644033) You can add Upsy to your Discord server and it can answer questions based on the chat history.
+
+> :warning: **Warning:** This is a public bot and the data you share with Upsy could be accessed by others. We recommend deploying your own instance of Upsy for private conversations.
+
+
 <img src="./static/demo.png" width="700">
 
+
+## Table of Contents
 
 1. [Tech Stack](#user-content-upsys-defaults)
 2. [Features](#user-content-features)

@@ -7,11 +7,14 @@
                 "fields": [
                     {
                         "name": "Important {{REF:fields.commands}}",
-                        "value": ["{{CMD_LINK_HELP}} - {{REF:commandDescs.help}}"]
+                        "value": [
+                            "/help - {{REF:commandDescs.help}}",
+                            "/savehistory - {{REF:commandDescs.savehistory}}"
+                        ]
                     },
                     {
                         "name": "{{REF:fields.links}}",
-                        "value": ["{{REF:links.docsEmbed}}", "{{REF:links.supportEmbed}}"]
+                        "value": ["{{REF:links.docsEmbed}}"]
                     }
                 ]
             },
@@ -23,7 +26,7 @@
                 "fields": [
                     {
                         "name": "{{REF:fields.links}}",
-                        "value": ["{{REF:links.supportEmbed}}"]
+                        "value": ["{{REF:links.docsEmbed}}"]
                     }
                 ]
             },

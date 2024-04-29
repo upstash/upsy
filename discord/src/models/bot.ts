@@ -96,6 +96,12 @@ export class Bot {
 
     private onShardReady(shardId: number, _unavailableGuilds: Set<string>): void {
         Logger.setShardId(shardId);
+        this.client.user.setActivity({
+            name: 'upstash.com',
+            state: 'Serverless Data Platform',
+            url: 'https://upstash.com',
+            type: 3,
+        });
     }
 
     private async onGuildJoin(guild: Guild): Promise<void> {
