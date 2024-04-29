@@ -1,9 +1,0 @@
-[
-    {
-        "name": "upstash.com",
-        "enabled": false,
-        "url": "https://upstash.com",
-        "authorization": "<TOKEN>",
-        "body": "{\"server_count\":{{SERVER_COUNT}}}"
-    }
-]

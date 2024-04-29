@@ -25,7 +25,7 @@ import {
     ReactionHandler,
 } from '../events/index.js';
 import { addDocument, isQuestion, isWorthReaction, query } from '../llm/llm.js';
-import { JobService, Logger } from '../services/index.js';
+import { Logger } from '../services/index.js';
 import { extractTextFromDocx, extractTextFromPDF } from '../utils/doc-utils.js';
 import { PartialUtils } from '../utils/index.js';
 
@@ -45,8 +45,7 @@ export class Bot {
         private messageHandler: MessageHandler,
         private commandHandler: CommandHandler,
         private buttonHandler: ButtonHandler,
-        private reactionHandler: ReactionHandler,
-        private jobService: JobService
+        private reactionHandler: ReactionHandler
     ) {}
 
     public async start(): Promise<void> {
@@ -85,10 +84,6 @@ export class Bot {
     private async onReady(): Promise<void> {
         let userTag = this.client.user?.tag;
         Logger.info(Logs.info.clientLogin.replaceAll('{USER_TAG}', userTag));
-
-        if (!Debug.dummyMode.enabled) {
-            this.jobService.start();
-        }
 
         this.ready = true;
         Logger.info(Logs.info.clientReady);

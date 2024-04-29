@@ -28,15 +28,9 @@ import {
     TriggerHandler,
 } from './events/index.js';
 import { CustomClient } from './extensions/index.js';
-import { Job } from './jobs/index.js';
 import { Bot } from './models/bot.js';
 import { Reaction } from './reactions/index.js';
-import {
-    CommandRegistrationService,
-    EventDataService,
-    JobService,
-    Logger,
-} from './services/index.js';
+import { CommandRegistrationService, EventDataService, Logger } from './services/index.js';
 import { Trigger } from './triggers/index.js';
 
 const require = createRequire(import.meta.url);
@@ -101,11 +95,6 @@ async function start(): Promise<void> {
     let messageHandler = new MessageHandler(triggerHandler);
     let reactionHandler = new ReactionHandler(reactions, eventDataService);
 
-    // Jobs
-    let jobs: Job[] = [
-        // TODO: Add new jobs here
-    ];
-
     // Bot
     let bot = new Bot(
         Config.client.token,
@@ -115,8 +104,7 @@ async function start(): Promise<void> {
         messageHandler,
         commandHandler,
         buttonHandler,
-        reactionHandler,
-        new JobService(jobs)
+        reactionHandler
     );
 
     // Register

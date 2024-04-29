@@ -1,7 +1,7 @@
 import { Shard, ShardingManager } from 'discord.js';
 import { createRequire } from 'node:module';
 
-import { JobService, Logger } from '../services/index.js';
+import { Logger } from '../services/index.js';
 
 const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');
@@ -9,10 +9,7 @@ let Debug = require('../../config/debug.json');
 let Logs = require('../../lang/logs.json');
 
 export class Manager {
-    constructor(
-        private shardManager: ShardingManager,
-        private jobService: JobService
-    ) {}
+    constructor(private shardManager: ShardingManager) {}
 
     public async start(): Promise<void> {
         this.registerListeners();
@@ -39,8 +36,6 @@ export class Manager {
         if (Debug.dummyMode.enabled) {
             return;
         }
-
-        this.jobService.start();
     }
 
     private registerListeners(): void {
