@@ -1,0 +1,33 @@
+# fly.toml app configuration file generated for dcbot on 2024-04-29T20:52:04+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'upsy-slackbot'
+primary_region = 'lhr'
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  # Auto stop machines is false because we want to keep the bot running all the time.
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+#[env]
+#  OPENAI_API_KEY=
+#  UPSTASH_REDIS_REST_URL=
+#  UPSTASH_REDIS_REST_TOKEN=
+#  SLACK_ACCESS_TOKEN=
+#  SLACK_SIGNING_SECRET=
+#  SLACK_APP_TOKEN=
+#  UPSTASH_VECTOR_REST_URL=
+#  UPSTASH_VECTOR_REST_TOKEN=

@@ -75,7 +75,7 @@ To enable the bot to access the message history, you need to enable the `Privile
 
 ### Default Install Settings 
 
-Under Settings > Default Install Settings, update scopes and permissions as follows:
+After choosing Install Link (Settings > Installation) as Discord provided link, you need to update scopes and permissions under Default Install Settings as follows:
 
 Scopes: applications.commands, bot
 
@@ -108,7 +108,7 @@ You can find your application ID in the General Information section of your Disc
 } 
 ```
 
-### Set the environment variables in Dockerfile or fly.toml
+### Set the environment variables either in Dockerfile or fly.toml:
 
 ```properties
 OPENAI_API_KEY=""
@@ -133,6 +133,9 @@ docker run -d -p 3001:3001 upsy-discord
 fly launch
 fly deploy
 ```
+
+Don't forget to run `fly scale count 1` to make sure only one instance is running.
+
 
 ### Add the bot to your Discord server
 
@@ -268,7 +271,7 @@ git clone git@github.com:upstash/upsy.git
 cd upsy/slack
 ```
 
-Edit the environment variables in Dockerfile or fly.toml:
+Edit the environment variables either in Dockerfile or fly.toml:
 
 ```properties
 # Retrieved here: https://platform.openai.com/api-keys
