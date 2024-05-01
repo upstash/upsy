@@ -238,7 +238,7 @@ git clone git@github.com:upstash/upsy.git
 cd upsy/slack
 ```
 
-Set the environment variables in Dockerfile:
+Set the environment variables either in Dockerfile or fly.toml:
 
 ```properties
 OPENAI_API_KEY=""
