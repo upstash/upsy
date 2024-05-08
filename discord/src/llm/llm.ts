@@ -1,6 +1,6 @@
 import { PromptTemplate } from '@langchain/core/prompts';
 import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai';
-import { Redis } from '@upstash/redis';
+import { Redis } from 'ioredis';
 import { Index } from '@upstash/vector';
 import { Message } from 'discord.js';
 import { ConversationChain } from 'langchain/chains';
@@ -46,11 +46,8 @@ const questionPromptForIM = PromptTemplate.fromTemplate(
   Answer (Should be less than 2000 characters.)`
 );
 
-// **Redis Configuration (Assuming you're using Upstash for Redis)**
-const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-});
+// **Redis Configuration**
+const redis = new Redis(process.env.REDIS_URL);
 
 // **Vector Database Interface**
 const index = new Index({

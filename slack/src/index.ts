@@ -1,6 +1,6 @@
 import { App } from "@slack/bolt";
 import moment = require("moment");
-import { Redis } from "@upstash/redis";
+import { Redis } from "ioredis";
 import {
   addDocuments,
   addDocument,
@@ -10,7 +10,7 @@ import {
 } from "./llm/llm";
 import { extractTextFromDocx, extractTextFromPDF } from "./utils/util";
 
-const redis = Redis.fromEnv();
+const redis = new Redis(process.env.REDIS_URL);
 
 // Usage
 /*
