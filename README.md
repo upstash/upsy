@@ -112,8 +112,7 @@ You can find your application ID in the General Information section of your Disc
 
 ```properties
 OPENAI_API_KEY=""
-UPSTASH_REDIS_REST_TOKEN=""
-UPSTASH_REDIS_REST_URL=""
+REDIS_URL=""
 UPSTASH_VECTOR_REST_TOKEN=""
 UPSTASH_VECTOR_REST_URL=""
 ```
@@ -242,8 +241,7 @@ Set the environment variables either in Dockerfile or fly.toml:
 
 ```properties
 OPENAI_API_KEY=""
-UPSTASH_REDIS_REST_TOKEN=""
-UPSTASH_REDIS_REST_URL=""
+REDIS_URL=""
 UPSTASH_VECTOR_REST_TOKEN=""
 UPSTASH_VECTOR_REST_URL=""
 SLACK_ACCESS_TOKEN=""
@@ -278,8 +276,7 @@ Edit the environment variables either in Dockerfile or fly.toml:
 OPENAI_API_KEY=
 
 # Retrieved here: https://console.upstash.com/   
-UPSTASH_REDIS_REST_URL=
-UPSTASH_REDIS_REST_TOKEN=
+REDIS_URL=
 
 # Retrieved here: https://console.upstash.com/vector
 UPSTASH_VECTOR_REST_URL=
