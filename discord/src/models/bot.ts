@@ -137,28 +137,49 @@ export class Bot {
                 return;
             }
 
-            if (msg.content.toLowerCase().startsWith('upsy')) {
-                msg.react('🏃');
+            let upsyMentioned =
+                msg.content.toLowerCase().startsWith('upsy') ||
+                msg.mentions.has(this.client.user) ||
+                msg.guildId === null;
 
-                let resp = await query(
-                    'im',
-                    msg.content,
-                    msg.channel.id,
-                    msg.author.username,
-                    true
-                );
-                msg.reply(resp + `${msg.author}`).then(msg => {
-                    msg.react('👍');
-                    msg.react('👎');
-                });
-            } else {
-                if (msg.author.id !== this.client.user.id) {
-                    let reaction = await isWorthReaction(msg.content);
-                    if (reaction) {
-                        msg.react(reaction);
+            if (msg.author.id !== this.client.user.id) {
+                if (upsyMentioned) {
+                    msg.react('🏃');
+
+                    let resp = await query(
+                        msg.guildId === null ? 'im' : 'channel',
+                        msg.content,
+                        msg.channel.id,
+                        msg.author.username,
+                        true
+                    );
+
+                    if (resp !== 'NONE') {
+                        msg.reply(resp + `${msg.author}`).then(msg => {
+                            msg.react('👍');
+                            msg.react('👎');
+                        });
+                    } else {
+                        msg.react('🤷🏻');
                     }
                 }
+            }
 
+            if (msg.author.id !== this.client.user.id && !upsyMentioned) {
+                let reaction = await isWorthReaction(msg.content);
+                if (reaction) {
+                    msg.react(reaction);
+                }
+            }
+
+            let question = false;
+
+            if (msg.content && msg.author.id !== this.client.user.id) {
+                question = await isQuestion(msg.content);
+                console.log('IS QUESTION: ', question);
+            }
+
+            if (!question) {
                 //get attachments
                 let attachment = msg.attachments.first();
 
@@ -193,18 +214,10 @@ export class Bot {
                     }
                 }
 
-                let question = false;
-
-                if (msg.content && msg.author.id !== this.client.user.id) {
-                    question = await isQuestion(msg.content);
-                    console.log('IS QUESTION: ', question);
-                }
-
                 if (
                     msg.content &&
                     !msg?.interaction?.commandName &&
-                    msg.author.id !== this.client.user.id &&
-                    !question
+                    msg.author.id !== this.client.user.id
                 ) {
                     addDocument(msg);
                 }
