@@ -29,12 +29,24 @@ export class SaveHistoryCommand implements Command {
             await intr.channel.messages
                 .fetch({ limit: 100, before: message.id })
                 .then(messagePage => {
-                    messagePage.forEach(msg => messages.push(msg));
+                    messagePage.forEach(msg => {
+                        let metadata = {
+                            id: msg.id,
+                            type: 'discord-channel-history',
+                            author: msg.author.displayName,
+                            guildId: msg.guildId,
+                            channelId: msg.channelId,
+                            content: msg.content,
+                        };
+                        messages.push({ id: msg.id, content: msg.content, metadata: metadata });
+                    });
 
                     // Update our message pointer to be the last message on the page of messages
                     message = 0 < messagePage.size ? messagePage.at(messagePage.size - 1) : null;
                 });
         }
+
+        messages = messages.filter(msg => msg.content && msg.content.length > 0);
 
         addDocuments(messages);
 

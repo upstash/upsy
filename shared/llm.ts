@@ -67,16 +67,16 @@ export async function isQuestion(question: string): Promise<boolean> {
 }
 
 export async function isWorthReaction(sentence: string): Promise<string> {
-  const chain = new ConversationChain({ llm: model });
-  const response = await chain.call({
-    input: `If the sentence feels like angry return "eyes", questions return "thinking_face", announcements return "tada" and jokes return "laughing". Returned text must be without : and " . (Return JUST the emoji text, If no text returned just say NO)"  -> Message: ${sentence}`,
-  });
+    const chain = new ConversationChain({ llm: model });
+    const response = await chain.call({
+        input: `If the sentence feels like angry return "eyes", questions return "thinking_face", announcements return "tada" and jokes return "laughing". Returned text must be without : and " . (Return JUST the emoji text, If no text returned just say NO)"  -> Message: ${sentence}`,
+    });
 
-  console.log(response);
+    console.log(response);
 
-  if (response.response.toLowerCase().startsWith('no')) return;
+    if (response.response.toLowerCase().startsWith('no')) return;
 
-  return response.response;
+    return response.response;
 }
 
 async function getRelevantDocuments(question: string): Promise<string | void> {
@@ -144,45 +144,32 @@ export async function query(
 
 // **Document Management Functions**
 export async function addDocument(metadata: any, content: string): Promise<void> {
-  console.log(
-    "adding document:" + content + " with metadata:" + { metadata: metadata },
-  );
-  const vector = await embeddings.embedDocuments([content]);
+    console.log('adding document:' + content + ' with metadata:' + { metadata: metadata });
+    const vector = await embeddings.embedDocuments([content]);
 
-  if (!vector || !vector[0]) {
-    return;
-  }
+    if (!vector || !vector[0]) {
+        return;
+    }
 
-  let response = await index.upsert({
-    id: "id" + Math.random(),
-    vector: vector[0],
-    metadata: metadata,
-  });
+    await index.upsert({
+        id: metadata.id,
+        vector: vector[0],
+        metadata: metadata,
+    });
 }
 
-export async function addDocuments(
-  messages: any[],
-  channelId: string,
-  type: string
-): Promise<void> {
-  console.log("adding documents:" + messages.length);
+export async function addDocuments(messages: any[]): Promise<void> {
+    console.log('adding documents:' + messages.length);
 
-  const vectors = await embeddings.embedDocuments(messages.map((m) => m.text));
-  const records = [];
-  for (let i = 0; i < messages.length; i++) {
-    records.push({
-      id: messages[i].client_msg_id,
-      vector: vectors[i],
-      metadata: {
-        id: (messages[i] as any).client_msg_id,
-        type: "slack-message",
-        author: (messages[i] as any).user,
-        guildId: (messages[i] as any).team,
-        channelId: messages[i].channel,
-        content: messages[i].text,
-      },
-    });
-  }
+    const vectors = await embeddings.embedDocuments(messages.map(m => m.content));
+    const records = [];
+    for (let i = 0; i < messages.length; i++) {
+        records.push({
+            id: messages[i].id,
+            vector: vectors[i],
+            metadata: messages[i].metadata,
+        });
+    }
 
-  await index.upsert(records);
+    await index.upsert(records);
 }

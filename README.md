@@ -123,7 +123,7 @@ UPSTASH_VECTOR_REST_URL=""
 #### Local Deployment
 
 ```bash
-docker build -t upsy-discord .
+docker build -f discord/Dockerfile -t upsy-discord .
 docker run -d -p 3001:3001 upsy-discord
 ```
 
@@ -254,7 +254,7 @@ SLACK_APP_TOKEN=""
 Run the following commands to start the server:
 
 ```bash
-docker build -t upsy-slack .
+docker build -f slack/Dockerfile -t upsy-slack .
 docker run -d -p 3000:3000 upsy-slack
 ```
 

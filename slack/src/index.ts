@@ -42,9 +42,8 @@ async function saveChannelHistory(channelId) {
         limit: 1000, // Slack recommends a reasonable default
         cursor: cursor, // cursor for pagination
       });
+      let messages = [];
 
-      // Print messages
-      const messagesArray = [];
       if (result.ok && result.messages) {
         console.warn("result.messages.length:" + result.messages.length);
         for (const message of result.messages) {
@@ -54,10 +53,18 @@ async function saveChannelHistory(channelId) {
             message.subtype !== "channel_join" &&
             message.text
           ) {
-            messagesArray.push(message);
+            let metadata = {
+              id: (message as any).client_msg_id,
+              type: 'slack-message',
+              author: (message as any).user,
+              guildId: (message as any).team,
+              channelId: (message as any).channel,
+              content: message.text,
+          }
+            messages.push({id: (message as any).client_msg_id, content: message.text, metadata: metadata});
           }
         }
-        await addDocuments(messagesArray, channelId, "slack-channel-history");
+        await addDocuments(messages);
 
         // If more messages are available, fetch them
         if (result.response_metadata && result.response_metadata.next_cursor) {
@@ -214,7 +221,7 @@ async function saveChannelHistory(channelId) {
             console.log(attachment);
             msgText =
               "Author: " +
-              authorInfo?.user?.real_name +
+              (authorInfo as any).user.real_name +
               "Attachment Name: " +
               attachment.name +
               " Attachment Url:" +
@@ -229,10 +236,9 @@ async function saveChannelHistory(channelId) {
             attachment.mimetype ===
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           ) {
-            console.log("2");
             msgText =
               "Author: " +
-              authorInfo?.user?.real_name +
+              (authorInfo as any).user.real_name +
               "Attachment Name: " +
               attachment.name +
               ", Attachment Url:" +

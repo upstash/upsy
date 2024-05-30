@@ -4,7 +4,7 @@ FROM node:21
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package*.json ./
+COPY slack/package*.json ./
 
 # Install packages
 RUN npm install
@@ -17,7 +17,10 @@ RUN npm install -g ts-node
 RUN sed -i 's/let isDebugMode = !module.parent;/let isDebugMode = false;/' node_modules/pdf-parse/index.js
 
 # Copy the app code
-COPY . .
+COPY slack/ .
+
+# COPY files in shared to the app
+COPY shared/ /app/src/llm
 
 # Build the project
 RUN tsc

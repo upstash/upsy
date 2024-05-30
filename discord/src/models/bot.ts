@@ -142,7 +142,7 @@ export class Bot {
                 msg.mentions.has(this.client.user) ||
                 msg.guildId === null;
 
-            if (msg.author.id !== this.client.user.id) {
+            if (msg.author.id !== this.client.user.id && !msg?.interaction?.commandName) {
                 if (upsyMentioned) {
                     msg.react('🏃');
 
@@ -165,7 +165,11 @@ export class Bot {
                 }
             }
 
-            if (msg.author.id !== this.client.user.id && !upsyMentioned) {
+            if (
+                msg.author.id !== this.client.user.id &&
+                !upsyMentioned &&
+                !msg?.interaction?.commandName
+            ) {
                 let reaction = await isWorthReaction(msg.content);
                 if (reaction) {
                     msg.react(reaction);
@@ -174,12 +178,16 @@ export class Bot {
 
             let question = false;
 
-            if (msg.content && msg.author.id !== this.client.user.id) {
+            if (
+                msg.content &&
+                msg.author.id !== this.client.user.id &&
+                !msg?.interaction?.commandName
+            ) {
                 question = await isQuestion(msg.content);
                 console.log('IS QUESTION: ', question);
             }
 
-            if (!question) {
+            if (!question && !msg?.interaction?.commandName) {
                 //get attachments
                 let attachment = msg.attachments.first();
 
@@ -219,7 +227,20 @@ export class Bot {
                     !msg?.interaction?.commandName &&
                     msg.author.id !== this.client.user.id
                 ) {
-                    addDocument(msg);
+                    msg.content += ', Date: ' + new Date().toLocaleDateString();
+                    msg.content += ', Author: ' + msg.author.displayName;
+
+                    let metadata = {
+                        id: msg.id,
+                        type: 'discord-message',
+                        author: msg.author.displayName,
+                        guildId: msg.guildId,
+                        channelId: msg.channelId,
+                        content: msg.content,
+                        createdAt: new Date().toLocaleDateString(),
+                    };
+
+                    addDocument(metadata, msg.content);
                 }
             }
 
