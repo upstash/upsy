@@ -1,0 +1,31 @@
+{
+    "bot": {
+        "name": "Upsy",
+        "author": "Upstash"
+    },
+    "emojis": {
+        "yes": "✅",
+        "no": "❌",
+        "enabled": "🟢",
+        "disabled": "🔴",
+        "info": "ℹ️",
+        "warning": "⚠️",
+        "previous": "◀️",
+        "next": "▶️",
+        "first": "⏪",
+        "last": "⏩",
+        "refresh": "🔄"
+    },
+    "colors": {
+        "default": "#0099ff",
+        "success": "#00ff83",
+        "warning": "#ffcc66",
+        "error": "#ff4a4a"
+    },
+    "links": {
+        "author": "https://github.com/",
+        "docs": "https://github.com/upstash/upsy/blob/master/README.md",
+        "source": "https://github.com/upstash/upsy",
+        "template": "https://github.com/KevinNovak/Discord-Bot-TypeScript-Template"
+    }
+}
