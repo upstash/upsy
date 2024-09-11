@@ -2,23 +2,12 @@
 
 # Upsy: Your new mate on Discord & Slack. Powered by AI.
 
-
 > [!NOTE]  
 > **This project is a Community Project.**
 >
 > The project is maintained and supported by the community. Upstash may contribute but does not officially support or assume responsibility for it.
 
 Upsy is an open source Discord & Slack bot that remembers your conversations to provide **fast, accurate answers whenever you have a question**.
-
-## Demo: 
-
-[Discord Bot Link](https://discord.com/oauth2/authorize?client_id=1220739209321644033) You can add Upsy to your Discord server and it can answer questions based on the chat history.
-
-> :warning: **Warning:** This is a public bot and the data you share with Upsy could be accessed by others. We recommend deploying your own instance of Upsy for private conversations.
-
-
-<img src="./static/demo.png" width="700">
-
 
 ## Table of Contents
 
@@ -142,6 +131,10 @@ Don't forget to run `fly scale count 1` to make sure only one instance is runnin
 To add the bot to your Discord server, you need to generate an OAuth2 URL. Go to the Installation section of your Discord application and under Install Link, select the discord provided link. You can then add the bot to your server.
 
 At this point, you should see the bot online in your Discord server.
+
+## Slack Setup
+
+Checkout [Upsy Slack documentation](./slack/README.md).
 
 ### Notes:
 
