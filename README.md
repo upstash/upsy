@@ -32,20 +32,33 @@ Create an application at “https://discord.com/developers/applications".
 
 To enable the bot to access the message history, you need to enable the `Privileged Gateway Intents`. Go to the `Bot` section of your Discord application and enable the `MESSAGE CONTENT INTENT ` and `SERVER MEMBERS INTENT`.
 
+> up1.png
+
 ### Default Install Settings 
+
+Go to Settings > Installation, check only `Guild Install`  (uncheck `User Install`)
+
+> up2
 
 After choosing Install Link (Settings > Installation) as Discord provided link, you need to update scopes and permissions under Default Install Settings as follows:
 
 Scopes: applications.commands, bot
 
-Bot Permissions: Send Messages, Read Message History, Use Slash Commands, Add Reactions, Embed Links, Read Messages/View Channels, Send Messages in Threads, Use External Emojis, Send TTS Messages.
+Bot Permissions: Send Messages, Read Message History, View Channels, Send Messages in Threads.
+
+> up3
 
 
 ### Get your Bot Token
 Reset token in the bot section of your Discord application.
-Your token should start with "MTIzMz…"
+Your token should start with "MTIzMz…" You can also set an icon for your Upsy app.
 
-### Put your token into config/config.json file
+> up4
+
+
+### Config File
+Clone the discord folder and set your token into config/config.json file
+
 
 ```json
 {
