@@ -32,13 +32,13 @@ Create an application at “https://discord.com/developers/applications".
 
 To enable the bot to access the message history, you need to enable the `Privileged Gateway Intents`. Go to the `Bot` section of your Discord application and enable the `MESSAGE CONTENT INTENT ` and `SERVER MEMBERS INTENT`.
 
-> up1.png
+![up1](./up1.png)
 
 ### Default Install Settings 
 
 Go to Settings > Installation, check only `Guild Install`  (uncheck `User Install`)
 
-> up2
+![up2](./up2.png)
 
 After choosing Install Link (Settings > Installation) as Discord provided link, you need to update scopes and permissions under Default Install Settings as follows:
 
@@ -46,15 +46,13 @@ Scopes: applications.commands, bot
 
 Bot Permissions: Send Messages, Read Message History, View Channels, Send Messages in Threads.
 
-> up3
-
+![up3](./up3.png)
 
 ### Get your Bot Token
 Reset token in the bot section of your Discord application.
 Your token should start with "MTIzMz…" You can also set an icon for your Upsy app.
 
-> up4
-
+![up4](./up4.png)
 
 ### Config File
 Clone the discord folder and set your token into config/config.json file
@@ -81,6 +79,7 @@ You can find your application ID in the General Information section of your Disc
 ```
 
 ### Set the environment variables either in Dockerfile or fly.toml:
+You need to create Redis and Vector databases from [Upstash](https://console.upstash.com)
 
 ```properties
 OPENAI_API_KEY=""
