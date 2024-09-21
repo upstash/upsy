@@ -7,13 +7,13 @@
 >
 > The project is maintained and supported by the community. Upstash may contribute but does not officially support or assume responsibility for it.
 
-Upsy is an open source Discord & Slack bot that provides **fast, accurate answers whenever you have a question**.
+Upsy is an open source Discord & Slack bot that provides **fast, accurate answers whenever you have a question**. 
 
 ## How to use it?
 
-- Mention Upsy or @upsy in a question within a channel, and Upsy will create a thread to answer your query.
+- Mention Upsy in a question within a channel, and Upsy will respond in a thread.
 
-- If someone asks a question in a channel, react with a ❓ or 🤔 emoji. Upsy will then create a thread and provide an answer.
+- If someone asks a question in a channel, react with a ❓ or 🤔 emoji. Upsy will then create a thread and give an answer.
 
 - Ask Upsy questions directly in DM for immediate responses.
 
