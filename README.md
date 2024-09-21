@@ -33,13 +33,13 @@ Create an application at “https://discord.com/developers/applications".
 
 To enable the bot to access the message history, you need to enable the `Privileged Gateway Intents`. Go to the `Bot` section of your Discord application and enable the `MESSAGE CONTENT INTENT ` and `SERVER MEMBERS INTENT`.
 
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/up1.png" width="800" border="1" />
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/up1.png" width="500" border="1" />
 
 ### Default Install Settings 
 
 Go to Settings > Installation, check only `Guild Install`  (uncheck `User Install`)
 
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/up2.png" width="800" border="1" />
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/up2.png" width="500" border="1" />
 
 
 After choosing Install Link (Settings > Installation) as Discord provided link, you need to update scopes and permissions under Default Install Settings as follows:
@@ -48,13 +48,13 @@ Scopes: applications.commands, bot
 
 Bot Permissions: Send Messages, Read Message History, View Channels, Send Messages in Threads.
 
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/up3.png" width="800" border="1" />
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/up3.png" width="500" border="1" />
 
 ### Get your Bot Token
 Reset token in the bot section of your Discord application.
 Your token should start with "MTIzMz…" You can also set an icon for your Upsy app.
 
-<img src="https://raw.githubusercontent.com/upstash/upsy/master/up4.png" width="800" border="1" />
+<img src="https://raw.githubusercontent.com/upstash/upsy/master/up4.png" width="500" border="1" />
 
 ### Config File
 Clone the discord folder and set your token into config/config.json file
