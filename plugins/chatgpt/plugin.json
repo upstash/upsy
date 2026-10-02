@@ -1,0 +1,106 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "upsy",
+  "version": "0.1.0",
+  "description": "Connect your AI assistants to your Upsy memory, files, connected accounts, and cloud browser with the access you choose.",
+  "author": {
+    "name": "Upstash",
+    "email": "support@upstash.com",
+    "url": "https://upstash.com"
+  },
+  "homepage": "https://upsy.ai/home",
+  "keywords": ["memory", "files", "productivity", "browser"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Upsy",
+        "shortDescription": "Your assistants, connected",
+        "longDescription": "Upsy helps AI assistants securely access your memory, files, connected accounts, and cloud browser. Search email, plan meetings, work with documents and project tools, and save useful context across assistants through the services you connect.\n\nGrant each assistant only the access it needs. Monitor tool activity in Upsy's audit log, and change or revoke access anytime. Memory additions require your approval.\n\nUpsy does not sell your data or use connected-account data to train AI models. Connected assistants have their own privacy policies. Tools depend on your permissions; browser automation needs a compatible client. See our Privacy Policy for details.",
+        "developerName": "Upstash",
+        "category": "Productivity",
+        "capabilities": [
+          "Work across connected services with the Upsy skill",
+          "Read memory and suggest additions",
+          "Find, read, and save files",
+          "Use connected accounts with permission",
+          "Connect to a cloud browser"
+        ],
+        "websiteURL": "https://upsy.ai/home",
+        "supportURL": "https://upstash.com/contact",
+        "privacyPolicyURL": "https://upsy.ai/privacy",
+        "termsOfServiceURL": "https://upsy.ai/terms",
+        "defaultPrompt": [
+          "Use my Upsy memory and files to catch me up on my current project.",
+          "Summarize my upcoming meetings and relevant messages using my Upsy connections.",
+          "Save a short project checklist to my Upsy files."
+        ],
+        "brandColor": "#1A2333",
+        "brandColorDark": "#FFFFFF",
+        "composerIcon": "./assets/icon.svg",
+        "composerIconDark": "./assets/icon-dark.svg",
+        "logo": "./assets/icon.svg",
+        "logoDark": "./assets/icon-dark.svg"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Read synthetic preferences saved in the review account's memory.",
+              "prompt": "Read my Upsy memory. What timezone and meeting preferences have I saved?",
+              "tools_triggered": "memory_read",
+              "expected_behavior": "Return the saved memory and report Europe/Istanbul, morning meetings, and 25-minute meetings. These are synthetic fixture values. Do not invent additional preferences or change memory."
+            },
+            {
+              "description": "List sample documents uploaded by the review account.",
+              "prompt": "List the files in my Upsy vault.",
+              "tools_triggered": "files_list",
+              "expected_behavior": "Return the user-uploaded launch-plan.txt and travel-plan.txt fixtures with their real file IDs and metadata. Only the authenticated account's visible files are listed; another assistant's private files are excluded."
+            },
+            {
+              "description": "Use the Upsy skill to catch up on the fictional Lantern launch from memory and the indexed sample launch plan.",
+              "prompt": "Create a brief for the Lantern launch project using my Upsy memory and files. Include the launch date, milestones, owner, and open questions.",
+              "tools_triggered": "memory_read, files_search, files_read",
+              "expected_behavior": "Activate the use-upsy skill, read relevant memory, search for the launch plan, and read the matching file by its returned ID. Report November 15, 2026, the three milestones (finish onboarding copy, run accessibility checks, and publish the launch checklist), and the fictional owner Avery. Identify launch-plan.txt with its returned file ID as a source. Mark undocumented progress and blockers as unknown, distinguish suggestions from documented facts, omit unrelated personal information, and create no file or memory change."
+            },
+            {
+              "description": "Save an assistant-created text file and read it back within the same connection.",
+              "prompt": "Save review-checklist.txt in Upsy with these three lines: Check onboarding copy; Run accessibility checks; Publish launch checklist. Then read the saved file back.",
+              "tools_triggered": "files_upload, files_read",
+              "expected_behavior": "Create review-checklist.txt with the requested text in the calling assistant's folder, return its file ID, and read that ID back. The returned text contains all three requested lines. No existing file is overwritten and no file is sent outside Upsy."
+            },
+            {
+              "description": "Create a pending memory suggestion without editing the user's memory document.",
+              "prompt": "Suggest adding 'Prefers window seats on trains' to my Upsy memory.",
+              "tools_triggered": "memory_suggest",
+              "expected_behavior": "Create a pending suggestion containing Prefers window seats on trains. State that the user must approve it in Upsy. Reading memory afterward shows the original document unchanged until the user accepts the suggestion."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Attempt to send email when the review connection has only Memory and Files access.",
+              "prompt": "Send an email through my Gmail account to someone@example.com saying the launch is approved.",
+              "tools_triggered": "None",
+              "expected_behavior": "Do not send or claim to send an email. Gmail tools are unavailable under the Memory and Files-only grant. Explain the missing permission or connection and ask the user to enable the required access in Upsy. Never use another account or the browser to bypass the grant."
+            },
+            {
+              "description": "Read a nonexistent file ID without leaking another user's or assistant's data.",
+              "prompt": "Read the Upsy file with ID f_openai_review_missing.",
+              "tools_triggered": "files_read",
+              "expected_behavior": "Return a file-not-found tool error and explain that the file is unavailable. Do not return content, a download URL, or guessed data, and do not search other users' or assistants' storage."
+            },
+            {
+              "description": "Reject an upload containing both text content and base64 content.",
+              "prompt": "Call files_upload with name invalid-review.txt, content hello, and content_base64 aGVsbG8=.",
+              "tools_triggered": "files_upload, or clarification before calling",
+              "expected_behavior": "Ask for exactly one content representation, or return the tool error Provide exactly one of content or content_base64. Create no file, report no successful upload, and preserve existing files."
+            }
+          ]
+        },
+        "demo_recording_url": "https://player.mux.com/v4Hy8JtH01TEBjugRoybp3FdqW5V6aGwzkBoscK01tEIc"
+      },
+      "publication": {
+        "release_notes": "Upsy plugin submission, version 0.1.0, from Upstash. Includes the Use Upsy skill for secure access to memory, files, connected services, custom MCP servers, and the cloud browser. Provides guidance for meetings, email, project updates, preserving context, supported account connections, and activity auditing. The skill discovers tools, selects accounts, respects permission limits, and checks uncertain action results before retrying. Includes starter prompts and review test cases, with About text covering privacy, auditing, and access controls."
+      }
+    }
+  }
+}

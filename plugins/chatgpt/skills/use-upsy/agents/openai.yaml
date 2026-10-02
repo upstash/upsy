@@ -1,0 +1,12 @@
+interface:
+  display_name: "Use Upsy"
+  short_description: "Secure access, connected tasks, and activity auditing"
+  default_prompt: "Use $use-upsy to prepare me for my next meeting using my connected accounts and saved context."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "upsy"
+      description: "Upsy memory, files, connected accounts, and cloud browser within the user's permissions."
+      transport: "streamable_http"
+      url: "https://upsy.ai/connect"
