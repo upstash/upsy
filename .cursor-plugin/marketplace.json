@@ -1,0 +1,17 @@
+{
+  "name": "upsy-plugins",
+  "owner": {
+    "name": "Upstash",
+    "email": "support@upstash.com"
+  },
+  "metadata": {
+    "description": "Upsy integrations for AI assistants"
+  },
+  "plugins": [
+    {
+      "name": "upsy",
+      "source": "plugins/cursor",
+      "description": "Connect to Upsy memory, files, connected accounts, and cloud browser through OAuth."
+    }
+  ]
+}

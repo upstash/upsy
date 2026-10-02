@@ -6,6 +6,7 @@ browser with the access you choose.
 - [Upsy](https://upsy.ai/home)
 - [Core application source](https://github.com/upstash/upsy-core)
 - [ChatGPT plugin](plugins/chatgpt/)
+- [Cursor and Grok Bot plugin](plugins/cursor/)
 
 ## ChatGPT plugin
 
@@ -24,3 +25,11 @@ The output is `dist/upsy-0.1.0.zip`. The builder includes only the six plugin
 files listed in the script and runs local metadata, asset, and credential checks.
 Directory submission and publishing are managed separately in the OpenAI portal.
 Keep reviewer credentials and private submission details outside this repository.
+
+## Cursor and Grok Bot
+
+The OAuth MCP plugin and Use Upsy skill live in `plugins/cursor/`. The root
+`.cursor-plugin/marketplace.json` indexes this package for Cursor. See the
+[package README](plugins/cursor/README.md) for local installation, authentication,
+test cases, team distribution, and marketplace submission. The Cursor package
+is MIT-licensed.

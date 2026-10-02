@@ -1,0 +1,17 @@
+{
+  "name": "upsy",
+  "displayName": "Upsy",
+  "version": "0.1.0",
+  "description": "Connect your assistant to Upsy memory, files, connected accounts, and cloud browser with the access you choose.",
+  "author": {
+    "name": "Upstash",
+    "email": "support@upstash.com"
+  },
+  "homepage": "https://upsy.ai/home",
+  "repository": "https://github.com/upstash/upsy",
+  "license": "MIT",
+  "keywords": ["memory", "files", "email", "calendar", "productivity", "mcp"],
+  "logo": "assets/logo.svg",
+  "skills": "skills/",
+  "mcpServers": "mcp.json"
+}
